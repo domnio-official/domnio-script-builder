@@ -82,7 +82,7 @@ function copy() {
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(22, 23, 25);">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="https://domnio.tk">
       <img src="./assets/logo.png" alt="Logo" width="30" draggable="false" class="d-inline-block align-text-top">
       <b> Domnio Script Maker</b>
     </a>
@@ -92,13 +92,13 @@ function copy() {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#codeModal" v-on:click="showCode()">Export to Javascript</button>
+          <button type="button" style="margin-top: 5px;" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#codeModal" v-on:click="showCode()">Export to Javascript</button>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="https://dsc.gg/domnio" target="_blank">Discord server</a>
+          <a class="nav-link text-white" href="https://dsc.gg/domnio" target="_blank" style="margin-top: 5px;">Discord server</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle text-white" style="margin-top: 5px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu bg-white">
@@ -108,12 +108,11 @@ function copy() {
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+        <div id="AD">
+        <a href="https://domnio.tk/#team" target="_blank"><img src="./assets/defaultBanner.png" height="50" draggable="false" class="d-inline-block align-text-top"></a>
+        </div>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success text-white" type="submit">Search</button>
-      </form>
-    </div>
+      </div>
   </div>
 </nav>
 <div class="modal fade modal-xl modal-dialog-scrollable" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,10 +175,25 @@ body {
 #workspace {
   position: absolute;
     width: 100%;
-    height: calc(100% - 59px);
+    height: calc(100% - 70px);
+}
+
+#AD {
+  margin-left: 100px;
+}
+
+#toolbocs {
+  margin-top: 200px;
+}
+
+@media only screen and (max-device-width: 992px) {
+  #AD {
+  margin-left: 0px;
+}
 }
 
 /* .navbar-expand-lg {
-  min-height: 6.5%;
+  border: 5px solid #FFFF00;
+  padding: 50px 0;
 } */
 </style>

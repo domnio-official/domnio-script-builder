@@ -12,7 +12,7 @@
 
 import { ref } from "vue";
 import BlocklyComponent from "./components/BlocklyComponent.vue";
-import "./blocks/stocks";
+import './components/importBlocks';
 import Theme from '@blockly/theme-dark';
 import Swal from "sweetalert2";
 import * as toolbox from './components/toolbox';

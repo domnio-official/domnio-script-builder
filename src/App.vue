@@ -15,8 +15,11 @@ import BlocklyComponent from "./components/BlocklyComponent.vue";
 import './components/importBlocks';
 import Theme from '@blockly/theme-dark';
 import Swal from "sweetalert2";
+import JSZip from "jszip";
 import * as toolbox from './components/toolbox';
-
+import beautify from "js-beautify";
+import localforage from "localforage";
+import Blockly from "blockly";
 import BlocklyJS from "blockly/javascript";
 
 const foo = ref();
@@ -31,12 +34,20 @@ const options = {
   },
   zoom:{
   controls: true,
-  wheel: true,
+  wheel: false,
   startScale: 1.0,
   maxScale: 3,
   minScale: 0.3,
   scaleSpeed: 1.2,
   pinch: true
+},
+move: {
+  scrollbars: {
+    horizontal: true,
+    vertical: true
+  },
+  drag: true,
+  wheel: true
 },
   trashcan: true,
   renderer: "zelos",
@@ -59,6 +70,31 @@ function credits() {
     confirmButtonText: "OK 👍"
   });
 }
+
+function saveas() {
+      const zip = new JSZip();
+      const xmlContent = Blockly.Xml.domToPrettyText(
+        Blockly.Xml.workspaceToDom(foo.value.workspace)
+      );
+      const fileName = `projct.domscript`;
+      zip.file("blocks.xml", xmlContent);
+      zip.generateAsync({
+          type: "blob",
+        })
+        .then((blob) => {
+          const a = document.createElement("a");
+          a.style = "display: none";
+          document.body.appendChild(a);
+          const url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = fileName;
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+          // changesAreUnsaved = false
+          // workspaceContent = xmlContent
+        });
+      }
 </script>
 
 <template>
@@ -86,8 +122,8 @@ function credits() {
             File
           </a>
           <ul class="dropdown-menu bg-white">
-            <li><a class="dropdown-item" href="#">Save</a></li>
-            <li><a class="dropdown-item" href="#">Load</a></li>
+            <li><a class="dropdown-item" href="#" v-on:click="saveas()">Save</a></li>
+            <li><a class="dropdown-item" href="#" v-on:click="this.load()">Load</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
           </ul>
@@ -102,14 +138,14 @@ function credits() {
 <div class="modal fade modal-xl modal-dialog-scrollable" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-black">
+      <div class="modal-header bg-dark">
         <h5 class="modal-title text-white" id="exampleModalLabel">Code</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-black">
+      <div class="modal-body bg-dark">
         <pre v-html="code" class="text-white" id="codeee"></pre>
       </div>
-      <div class="modal-footer bg-black">
+      <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" v-on:click="copy()" data-bs-dismiss="modal" id="liveToastBtn">Copy</button>
       </div>

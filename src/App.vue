@@ -14,6 +14,7 @@ import { ref } from "vue";
 import BlocklyComponent from "./components/BlocklyComponent.vue";
 import "./blocks/stocks";
 import Theme from '@blockly/theme-dark';
+import Swal from "sweetalert2";
 
 import BlocklyJS from "blockly/javascript";
 
@@ -75,6 +76,15 @@ function copy() {
   var copyText = document.getElementById("codeee").innerText;
     navigator.clipboard.writeText(copyText)
 }
+
+function credits() {
+  Swal.fire({
+    title: "Credits",
+    icon: 'info',
+    html: "Leader: Farfa<br>Developer: Farfa",
+    confirmButtonText: "OK 👍"
+  });
+}
 </script>
 
 <template>
@@ -99,13 +109,13 @@ function copy() {
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white" style="margin-top: 5px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            File
           </a>
           <ul class="dropdown-menu bg-white">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Save</a></li>
+            <li><a class="dropdown-item" href="#">Load</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
           </ul>
         </li>
         <div id="AD">
@@ -182,9 +192,6 @@ body {
   margin-left: 100px;
 }
 
-#toolbocs {
-  margin-top: 200px;
-}
 
 @media only screen and (max-device-width: 992px) {
   #AD {

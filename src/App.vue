@@ -71,7 +71,8 @@ function credits() {
   });
 }
 
-function saveas() {
+
+   function saveas() {
       const zip = new JSZip();
       const xmlContent = Blockly.Xml.domToPrettyText(
         Blockly.Xml.workspaceToDom(foo.value.workspace)
@@ -94,7 +95,100 @@ function saveas() {
           // changesAreUnsaved = false
           // workspaceContent = xmlContent
         });
-      }
+      };
+
+      // ---------------- LOAD -----------------------
+      function askForFile() {
+      document.querySelector("#load-code").click();
+    };
+    function  load() {
+      this.$swal({
+        title: this.$t("file.confirm.title"),
+        text: this.$t("file.confirm.text"),
+        buttons: {
+          cancel: this.$t("file.confirm.cancel"),
+          no: {
+            text: this.$t("file.confirm.no"),
+            value: false,
+            className: "red-button",
+          },
+          yes: {
+            text: this.$t("file.confirm.yes"),
+            value: true,
+          },
+        },
+        closeOnClickOutside: false,
+      }).then(async (result) => {
+        if (typeof result == "object") {
+          return;
+        } else if (result) {
+          window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e.clear();
+        }
+        const file = document.getElementById("load-code").files[0];
+        const documentName = file.name
+          .split(".")
+          .slice(0, file.name.split(".").length - 1);
+        document.querySelector("#docName").textContent = documentName;
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          // console.log(e.target.result)
+          if (file.type == "text/xml") {
+            const decoder = new TextDecoder("utf-8");
+            const raw = decoder.decode(e.target.result);
+            const xml = Blockly.Xml.textToDom(raw);
+            Blockly.Xml.domToWorkspace(
+              xml,
+              window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e
+            );
+            return;
+          }
+          JSZip.loadAsync(e.target.result)
+            .then(async (data) => {
+              const dataObject = {};
+              if (data.file("blocks.xml")) {
+                dataObject.xml = await data.file("blocks.xml").async("string");
+              }
+              if (data.file("customBlocks.json")) {
+                dataObject.customBlocks = await data
+                  .file("customBlocks.json")
+                  .async("string");
+              }
+              return dataObject;
+            })
+            .then((dataobj) => {
+              if (dataobj.xml == null) return;
+              function load() {
+                const xml = Blockly.Xml.textToDom(dataobj.xml);
+                Blockly.Xml.domToWorkspace(
+                  xml,
+                  window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e
+                );
+              }
+              if (dataobj.customBlocks == null) {
+                load();
+                return;
+              }
+              fetchCustomBlocks(dataobj, load);
+            })
+            .catch((err) => {
+              this.$toast.open({
+                message: this.$t("load.error"),
+                type: "error",
+                dismissible: true,
+                duration: 10000,
+              });
+              console.warn(
+                "An error occurred when loading a file!",
+                String(err).substring(0, 250)
+              );
+            });
+        };
+        if (file) {
+          reader.readAsArrayBuffer(file);
+          document.getElementById("load-code").setAttribute("value", "");
+        }
+      });
+    }
 </script>
 
 <template>
@@ -123,7 +217,8 @@ function saveas() {
           </a>
           <ul class="dropdown-menu bg-white">
             <li><a class="dropdown-item" href="#" v-on:click="saveas()">Save</a></li>
-            <li><a class="dropdown-item" href="#" v-on:click="this.load()">Load</a></li>
+            <input hidden @change="load" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
+            <li><a class="dropdown-item" href="#" @click="askForFile">Load</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
           </ul>

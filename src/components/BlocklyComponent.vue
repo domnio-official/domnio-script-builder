@@ -13,6 +13,7 @@
 import { onMounted, ref, shallowRef } from "vue";
 import Blockly from "blockly";
 import {Backpack} from '@blockly/workspace-backpack';
+import Load from "./backpack-save-load.js";
 
 const props = defineProps(["options"]);
 const blocklyToolbox = ref();
@@ -41,7 +42,11 @@ onMounted(() => {
 };
   const backpack = new Backpack(workspace.value, backpackOptions);
   backpack.init();
-  
+  Load(backpack);
+    this.$store.commit("setWorkspace", {
+      workspace,
+    });
+
   console.log("%cOh, un utente!", "color:blue; font-size:100px");
   console.log("%cASPETTA! NON CHIUDERE LA CONSOLE! Se utilizzi come codice \"\" ottieni 50 Domnio Coins! Mi raccomando però, non dirlo a nessuno!", "color:orange; font-size:50px");
 });

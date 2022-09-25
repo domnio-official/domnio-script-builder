@@ -53,6 +53,7 @@ move: {
   toolbox: toolbox.list()
 };
 
+code.value = "(async () => {\n" + code.value + "})();";
 const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace));
 
 function copy() {

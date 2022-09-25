@@ -98,97 +98,38 @@ function credits() {
       };
 
       // ---------------- LOAD -----------------------
-      function askForFile() {
-      document.querySelector("#load-code").click();
-    };
-    function  load() {
-      this.$swal({
-        title: this.$t("file.confirm.title"),
-        text: this.$t("file.confirm.text"),
-        buttons: {
-          cancel: this.$t("file.confirm.cancel"),
-          no: {
-            text: this.$t("file.confirm.no"),
-            value: false,
-            className: "red-button",
-          },
-          yes: {
-            text: this.$t("file.confirm.yes"),
-            value: true,
-          },
-        },
-        closeOnClickOutside: false,
-      }).then(async (result) => {
-        if (typeof result == "object") {
-          return;
-        } else if (result) {
-          window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e.clear();
-        }
-        const file = document.getElementById("load-code").files[0];
-        const documentName = file.name
-          .split(".")
-          .slice(0, file.name.split(".").length - 1);
-        document.querySelector("#docName").textContent = documentName;
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-          // console.log(e.target.result)
-          if (file.type == "text/xml") {
-            const decoder = new TextDecoder("utf-8");
-            const raw = decoder.decode(e.target.result);
-            const xml = Blockly.Xml.textToDom(raw);
-            Blockly.Xml.domToWorkspace(
-              xml,
-              window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e
-            );
-            return;
-          }
-          JSZip.loadAsync(e.target.result)
-            .then(async (data) => {
-              const dataObject = {};
-              if (data.file("blocks.xml")) {
-                dataObject.xml = await data.file("blocks.xml").async("string");
-              }
-              if (data.file("customBlocks.json")) {
-                dataObject.customBlocks = await data
-                  .file("customBlocks.json")
-                  .async("string");
-              }
-              return dataObject;
-            })
-            .then((dataobj) => {
-              if (dataobj.xml == null) return;
-              function load() {
-                const xml = Blockly.Xml.textToDom(dataobj.xml);
-                Blockly.Xml.domToWorkspace(
-                  xml,
-                  window.blocklyWorkspaceThatIneedtoUseForThingsLaigwef9o8wifnwp4e
-                );
-              }
-              if (dataobj.customBlocks == null) {
-                load();
-                return;
-              }
-              fetchCustomBlocks(dataobj, load);
-            })
-            .catch((err) => {
-              this.$toast.open({
-                message: this.$t("load.error"),
-                type: "error",
-                dismissible: true,
-                duration: 10000,
-              });
-              console.warn(
-                "An error occurred when loading a file!",
-                String(err).substring(0, 250)
-              );
-            });
+      function askForFile(){
+            document.querySelector("#load-code").click().then(load());
         };
-        if (file) {
-          reader.readAsArrayBuffer(file);
-          document.getElementById("load-code").setAttribute("value", "");
+        function load(){
+            const file = document.getElementById("load-code").files[0];
+            const documentName = file.name.split(".").slice(0, file.name.split(".").length-1);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                JSZip.loadAsync(e.target.result)
+                    .then((data) => {
+                    if (data.file("blocks.xml")) {
+                        return data.file("blocks.xml").async("string")
+                    }
+                })
+                .then((text) => {
+                    const xml = Blockly.Xml.textToDom(text);
+                    Blockly.Xml.domToWorkspace(xml, foo.value.workspace);
+                    reader.close();
+                }).catch(() => {
+                    this.$toast.open({
+                        message: this.$t('load.error'),
+                        type: "error",
+                        dismissible: true,
+                        duration: 10000
+                    });
+                });
+            };
+            if (file) {
+                reader.readAsArrayBuffer(file);
+                document.getElementById("load-code").setAttribute("value", "");
+            }
         }
-      });
-    }
 </script>
 
 <template>
@@ -198,7 +139,7 @@ function credits() {
   <div class="container-fluid">
     <a class="navbar-brand" href="https://domnio.tk">
       <img src="./assets/logo.png" alt="Logo" width="30" draggable="false" class="d-inline-block align-text-top">
-      <b> Domnio Script Maker</b>
+      <b> Domnio Script Builder</b>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -256,12 +197,21 @@ function credits() {
 <style>
 
 @font-face {
+  font-family: "Nunito";
+  src: url(./fonts/Nunito.ttf);
+}
+
+@font-face {
   font-family: "Ubuntu";
   src: url(./fonts/Ubuntu.ttf);
 }
 
 a {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Nunito", "Ubuntu", sans-serif;
+}
+
+button[type=button] {
+  font-family: "Nunito", "Ubuntu", sans-serif;
 }
 
 #app {

@@ -157,9 +157,9 @@ function credits() {
             File
           </a>
           <ul class="dropdown-menu bg-white">
-            <li><a class="dropdown-item" href="#" v-on:click="saveas()">Save</a></li>
+            <li><a class="dropdown-item" v-on:click="saveas()">Save</a></li>
             <input hidden @change="load" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
-            <li><a class="dropdown-item" href="#" @click="askForFile">Load</a></li>
+            <li><a class="dropdown-item" @click="askForFile">Load</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
           </ul>

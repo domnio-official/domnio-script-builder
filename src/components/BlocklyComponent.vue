@@ -26,15 +26,17 @@ onMounted(() => {
   if (!options.toolbox) {
     options.toolbox = blocklyToolbox.value;
   }
+
   workspace.value = Blockly.inject(blocklyDiv.value, options);
+  workspace.value.addChangeListener(Blockly.Events.disableOrphans);
 
   const backpackOptions = {
-  allowEmptyBackpackOpen: false,
+  allowEmptyBackpackOpen: true,
   useFilledBackpackImage: true,
   contextMenu: {
     emptyBackpack: true,
     removeFromBackpack: true,
-    copyToBackpack: false,
+    copyToBackpack: true,
   },
 };
   const backpack = new Backpack(workspace.value, backpackOptions);

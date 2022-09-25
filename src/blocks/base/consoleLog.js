@@ -3,7 +3,7 @@ import * as Blockly from "blockly/core";
 Blockly.Blocks['console_log'] = {
     init: function() {
       this.appendValueInput("text")
-          .setCheck("String")
+          .setCheck()
           .appendField("Log to the console");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);

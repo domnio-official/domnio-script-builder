@@ -33,7 +33,13 @@ function list(){
     <sep />
     <category name="Base" colour="#7f6065">
     <block type="start"></block>
-    <block type="console_log"></block>
+    <block type="console_log" id="\`*0]s27uH,H;]FGmu(%O">
+    <value name="text">
+      <block type="text" id="L8cJ^z2UIK(V1~dnT4CW">
+        <field name="TEXT">hello world</field>
+      </block>
+    </value>
+  </block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

@@ -12,13 +12,11 @@
 
 import { ref } from "vue";
 import BlocklyComponent from "./components/BlocklyComponent.vue";
-import './components/importBlocks';
+import './blocks/importBlocks';
 import Theme from '@blockly/theme-dark';
 import Swal from "sweetalert2";
 import JSZip from "jszip";
 import * as toolbox from './components/toolbox';
-import beautify from "js-beautify";
-import localforage from "localforage";
 import Blockly from "blockly";
 import BlocklyJS from "blockly/javascript";
 

@@ -1,7 +1,7 @@
 <script>
 import { ref } from "vue";
 import BlocklyComponent from "./BlocklyComponent.vue";
-import './importBlocks';
+import '../blocks/importBlocks';
 import Theme from '@blockly/theme-dark';
 import Swal from "sweetalert2";
 import JSZip from "jszip";

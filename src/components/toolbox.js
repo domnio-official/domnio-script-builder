@@ -27,14 +27,13 @@ function list(){
     <category name="Text" colour="%{BKY_TEXTS_HUE}">
       <block type="text"></block>
       <block type="text_length"></block>
-      <block type="text_print"></block>
     </category>
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
-      </category>
-    <category name="Stocks" colour="%{BKY_LOOPS_HUE}">
-      <block type="stock_buy_simple"></block>
-      <block type="stock_buy_prog"></block>
-      <block type="stock_fetch_price"></block>
+    </category>
+    <sep />
+    <category name="Base" colour="#7f6065">
+    <block type="start"></block>
+    <block type="console_log"></block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

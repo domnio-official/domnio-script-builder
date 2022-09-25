@@ -355,8 +355,8 @@ function list(){
     </value>
 </block>
     </category>
-    <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
-    </category>
+    <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}" />
+    <category name="Functions" colour="#995ba5" custom="PROCEDURE" />
     <sep />
   <category name="Other" colour="#a300a3">
   <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">

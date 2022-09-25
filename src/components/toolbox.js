@@ -31,8 +31,18 @@ function list(){
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
     </category>
     <sep />
+  <category name="Other" colour="#a300a3">
+  <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">
+  <field name="type_time">seconds</field>
+  <value name="time">
+    <block type="math_number" id="z:(0k8Nwa?ca8{C0fXrY">
+      <field name="NUM">5</field>
+    </block>
+  </value>
+</block>
+  </category>
+    <sep />
     <category name="Base" colour="#7f6065">
-    <block type="start"></block>
     <block type="console_log" id="\`*0]s27uH,H;]FGmu(%O">
     <value name="text">
       <block type="text" id="L8cJ^z2UIK(V1~dnT4CW">
@@ -40,6 +50,7 @@ function list(){
       </block>
     </value>
   </block>
+  <block type="console_clear"></block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

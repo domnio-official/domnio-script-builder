@@ -14,6 +14,7 @@ import { onMounted, ref, shallowRef } from "vue";
 import Blockly from "blockly";
 import {Backpack} from '@blockly/workspace-backpack';
 import Load from "./backpack-save-load.js";
+// import * as It from 'blockly/msg/it';
 
 const props = defineProps(["options"]);
 const blocklyToolbox = ref();
@@ -23,16 +24,45 @@ const workspace = shallowRef();
 defineExpose({ workspace });
 
 onMounted(() => {
+//  Blockly.setLocale(It);
   const options = props.options || {};
   if (!options.toolbox) {
     options.toolbox = blocklyToolbox.value;
   }
 
+  /* Blockly.Events = function(event) {
+    console.log(event.toString());
+    if (event.type == "delete") {
+      event.type.ids.forEach(element => {
+        if(workspace-value.getBlockById(element.blockId) == 'start') {
+          var parentBlock = workspace.value.newBlock('start');
+          parentBlock.initSvg();
+          parentBlock.render();
+        }
+      });
+    }
+  } */
+
   workspace.value = Blockly.inject(blocklyDiv.value, options);
   workspace.value.addChangeListener(Blockly.Events.disableOrphans);
 
+  var parentBlock = workspace.value.newBlock('start');
+  parentBlock.initSvg();
+  parentBlock.render();
+
+  setInterval(checkStart, 500);
+  function checkStart() {
+    if (!String(workspace.value.getAllBlocks()).includes(String('Start'))) {
+      console.log("%cStart block has been removed, adding it again...", "color:red;")
+      parentBlock = workspace.value.newBlock('start');
+      parentBlock.initSvg();
+      parentBlock.render();
+      console.log("%cAdded Start Block", "color:green;")
+    }
+  }
+
   const backpackOptions = {
-  allowEmptyBackpackOpen: true,
+  allowEmptyBackpackOpen: false,
   useFilledBackpackImage: true,
   contextMenu: {
     emptyBackpack: true,
@@ -43,13 +73,11 @@ onMounted(() => {
   const backpack = new Backpack(workspace.value, backpackOptions);
   backpack.init();
   Load(backpack);
-    this.$store.commit("setWorkspace", {
-      workspace,
-    });
 
   console.log("%cOh, un utente!", "color:blue; font-size:100px");
   console.log("%cASPETTA! NON CHIUDERE LA CONSOLE! Se utilizzi come codice \"\" ottieni 50 Domnio Coins! Mi raccomando però, non dirlo a nessuno!", "color:orange; font-size:50px");
 });
+
 </script>
 
 <template>

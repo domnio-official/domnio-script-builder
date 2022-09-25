@@ -7,6 +7,7 @@ Blockly.Blocks['start'] = {
       this.appendStatementInput("start")
           .setCheck(null);
       this.setColour(66);
+      this.setDeletable(false);
    this.setTooltip("Start from here");
    this.setHelpUrl("");
     }

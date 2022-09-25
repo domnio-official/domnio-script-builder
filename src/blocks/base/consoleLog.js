@@ -16,6 +16,6 @@ Blockly.Blocks['console_log'] = {
   Blockly.JavaScript['console_log'] = function(block) {
     var value_text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = `console.log(${value_text})\n`;
+    var code = `console.log(${value_text});\n`;
     return code;
   };

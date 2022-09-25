@@ -53,8 +53,11 @@ move: {
   toolbox: toolbox.list()
 };
 
-code.value = "(async () => {\n" + code.value + "})();";
-const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace));
+const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\nconst delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n" + code.value + "})();");
+
+Blockly.Events.BLOCK_DELETE = function(event) {
+    console.log("A block was deleted");
+  }
 
 function copy() {
   var copyText = document.getElementById("codeee").innerText;

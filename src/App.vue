@@ -94,7 +94,14 @@
               a.download = fileName;
               a.click();
               window.URL.revokeObjectURL(url);
-              document.body.removeChild(a);
+              (document.body.removeChild(a)).then(
+              Swal.fire({
+                        title: "Success!",
+                        icon: 'success',
+                        html: "File generated!",
+                        timer: 2000,
+                        timerProgressBar: true
+                      }));
               // changesAreUnsaved = false
               // workspaceContent = xmlContent
             });

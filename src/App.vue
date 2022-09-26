@@ -17,6 +17,7 @@
     import Swal from "sweetalert2";
     import JSZip from "jszip";
     import * as toolbox from './components/toolbox';
+    import * as require from './components/require/require';
     // import * as save from './components/save-load';
     import Blockly from "blockly";
     import BlocklyJS from "blockly/javascript";
@@ -54,7 +55,7 @@
       toolbox: toolbox.list()
     };
     
-    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\nconst delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n" + code.value + "})();");
+    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\nconst delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n" + require.getRequires(String(code.value)) + code.value + "})();");
     
     Blockly.Events.BLOCK_DELETE = function(event) {
         console.log("A block was deleted");

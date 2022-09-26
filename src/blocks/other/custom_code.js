@@ -8,7 +8,7 @@ Blockly.Blocks['inject_code'] = {
           .appendField(new Blockly.FieldTextInput(""), "code");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(315);
+      this.setColour("#982880");
    this.setTooltip("");
    this.setHelpUrl("");
     }

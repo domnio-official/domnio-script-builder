@@ -8,6 +8,9 @@ function getRequires(code) {
     if (code.includes("await delay(")) {
         requires.push("const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));");
     }
+    if (code.includes("exec(")) {
+        requires.push("const { exec } = require(\"child_process\")");
+    }
 
 
     // ---- RETURN ------

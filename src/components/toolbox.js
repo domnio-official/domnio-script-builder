@@ -369,6 +369,7 @@ function list(){
   </value>
 </block>
 <block type="inject_code"></block>
+<block type="run_console_cmd"/>
   </category>
     <sep />
     <category name="Base" colour="#7f6065">

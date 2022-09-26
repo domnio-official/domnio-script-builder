@@ -10,7 +10,7 @@ Blockly.Blocks['delay'] = {
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(300);
+      this.setColour("#982880");
    this.setTooltip("");
    this.setHelpUrl("");
     }

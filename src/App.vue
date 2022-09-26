@@ -73,6 +73,14 @@
         confirmButtonText: "OK 👍"
       });
     }
+    function undo() {
+        Blockly.mainWorkspace.undo(false);
+        console.log("undo");
+    }
+    function redo() {
+        Blockly.mainWorkspace.undo(true);
+        console.log("redo");
+    }
     
     
        function saveas() {
@@ -203,6 +211,10 @@
             <div id="AD">
             <a href="https://domnio.tk/#team" target="_blank"><img src="./assets/defaultBanner.png" height="50" draggable="false" class="d-inline-block align-text-top"></a>
             </div>
+            <div id="controls">
+                <img src="./assets/undo.png" title="Undo (Ctrl + Z)" v-on:click="undo()" height="30" draggable="false" class="d-inline-block align-text-top">
+                <img src="./assets/redo.png" title="Redo (Ctrl + Y)" v-on:click="redo()" style="margin-left: 12px;" height="30" draggable="false" class="d-inline-block align-text-top">
+            </div>
           </ul>
           </div>
       </div>
@@ -281,11 +293,23 @@
     #AD {
       margin-left: 100px;
     }
+
+    #controls {
+        margin-top: 9px;
+        margin-left: 100px;
+        display: flex;
+        justify-content: space-between;
+    }
     
     
     @media only screen and (max-device-width: 992px) {
       #AD {
       margin-left: 0px;
+    }
+    #controls {
+        margin-top: 12px;
+        margin-left: 0px;
+        display: inline;
     }
     }
     

@@ -95,7 +95,7 @@ function checkOneStart(event) {
         if (strval > 1) {
           console.log("%cFrom Events.Move:", "color:yellow");
           console.log("%cThere are 2 start blocks!", "color:red;");
-          workspace.value.getBlockById(blockk.id).dispose(true);
+          workspace.value.getBlockById(event.blockId).dispose(true);
           console.log("%cRemoved 1 start block", "color:green;");
         }
       });

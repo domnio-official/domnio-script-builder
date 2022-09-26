@@ -56,7 +56,7 @@
       toolbox: toolbox.list()
     };
     
-    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\nconst delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n" + require.getRequires(String(code.value)) + code.value + "})();");
+    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();");
     
     Blockly.Events.BLOCK_DELETE = function(event) {
         console.log("A block was deleted");
@@ -185,7 +185,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="https://domnio.tk">
           <img src="./assets/logo.png" alt="Logo" width="30" draggable="false" class="d-inline-block align-text-top">
-          <b> Domnio Script Builder</b>
+          <b> Domnio Script Builder [BETA]</b>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

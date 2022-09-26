@@ -17,6 +17,7 @@ import Theme from '@blockly/theme-dark';
 import Swal from "sweetalert2";
 import JSZip from "jszip";
 import * as toolbox from './components/toolbox';
+// import * as save from './components/save-load';
 import Blockly from "blockly";
 import BlocklyJS from "blockly/javascript";
 
@@ -101,9 +102,20 @@ function credits() {
 
       // ---------------- LOAD -----------------------
       function askForFile(){
-            document.querySelector("#load-code").click().then(load());
+            document.querySelector("#load-code").click();
         };
         function load(){
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "The entire workspace will be replaced with the imported Domnio Script!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, import the script!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              foo.value.workspace.clear();
             const file = document.getElementById("load-code").files[0];
             const documentName = file.name.split(".").slice(0, file.name.split(".").length-1);
             const reader = new FileReader();
@@ -118,19 +130,34 @@ function credits() {
                     const xml = Blockly.Xml.textToDom(text);
                     Blockly.Xml.domToWorkspace(xml, foo.value.workspace);
                     reader.close();
+                    Swal.fire({
+                    title: "Success!",
+                    icon: 'success',
+                    html: "Project imported!",
+                    confirmButtonText: "OK"
+                  });
                 }).catch(() => {
-                    this.$toast.open({
-                        message: this.$t('load.error'),
-                        type: "error",
-                        dismissible: true,
-                        duration: 10000
-                    });
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 1300
+                  });
+
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Project imported'
+                  })
                 });
             };
             if (file) {
                 reader.readAsArrayBuffer(file);
                 document.getElementById("load-code").setAttribute("value", "");
             }
+        }
+
+          })
         }
 </script>
 
@@ -160,7 +187,7 @@ function credits() {
           </a>
           <ul class="dropdown-menu bg-white">
             <li><a class="dropdown-item" v-on:click="saveas()">Save</a></li>
-            <input hidden @change="load" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
+            <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
             <li><a class="dropdown-item" @click="askForFile">Load</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>

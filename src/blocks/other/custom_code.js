@@ -1,6 +1,5 @@
 import * as Blockly from "blockly/core";
 
-
 Blockly.Blocks['inject_code'] = {
     init: function() {
       this.appendDummyInput()

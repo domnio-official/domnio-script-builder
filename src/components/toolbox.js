@@ -370,6 +370,8 @@ function list(){
 </block>
 <block type="inject_code"></block>
 <block type="run_console_cmd"/>
+<block type="eval"/>
+<block type="eval_left"/>
   </category>
     <sep />
     <category name="Base" colour="#7f6065">

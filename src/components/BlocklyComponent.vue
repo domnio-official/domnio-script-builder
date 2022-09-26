@@ -67,14 +67,15 @@ onMounted(() => {
 function checkOneStart(event) {
   if (event.type == Blockly.Events.BLOCK_CREATE) {
     event.ids.forEach(element => {
-    if (String(workspace.value.getBlockById(element)) == "Start ?") {
+    if ((String(workspace.value.getBlockById(element))).includes("Start ?")) {
       var starts = workspace.value.getAllBlocks();
       var strval = 0;
       starts.forEach(blockk => {
-        if (workspace.value.getBlockById(blockk.id) == "Start ?") {
+        if ((String(workspace.value.getBlockById(blockk.id))).includes("Start ?")) {
           strval = strval + 1;
         }
         if (strval > 1) {
+          console.log("%cFrom Events.Block_Create:", "color:yellow");
           console.log("%cThere are 2 start blocks!", "color:red;");
           workspace.value.getBlockById(element).dispose(true);
           console.log("%cRemoved 1 start block", "color:green;");
@@ -82,6 +83,23 @@ function checkOneStart(event) {
       });
     }
 });
+  }
+  else if (event.type == Blockly.Events.MOVE) {
+    if (String((workspace.value.getBlockById(event.blockId)).type) == "start") {
+      var starts = workspace.value.getAllBlocks();
+      var strval = 0;
+      starts.forEach(blockk => {
+        if (String((workspace.value.getBlockById(blockk.id)).type) == "start") {
+          strval = strval + 1;
+        }
+        if (strval > 1) {
+          console.log("%cFrom Events.Move:", "color:yellow");
+          console.log("%cThere are 2 start blocks!", "color:red;");
+          workspace.value.getBlockById(blockk.id).dispose(true);
+          console.log("%cRemoved 1 start block", "color:green;");
+        }
+      });
+    }
   }
 }
 

@@ -155,6 +155,7 @@ function list(){
     <block type="text">
     <field name="TEXT" />
 </block>
+<block type="convert_to_string"></block>
 <block type="text_join">
     <mutation items="2" />
 </block>
@@ -371,6 +372,7 @@ function list(){
   </category>
     <sep />
     <category name="Base" colour="#7f6065">
+    <label text='Console Blocks' />
     <block type="console_log">
     <value name="text">
     <shadow type="text">
@@ -379,6 +381,9 @@ function list(){
 </value>
   </block>
   <block type="console_clear"></block>
+  <label text='Asks an input to the console and saves the result in the "value" block' />
+  <block type="ask_input"></block>
+  <block type="ask_input_left"></block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

@@ -2,8 +2,8 @@ function getRequires(code) {
     var requires = [];
 
     // ------ CHECKS --------
-    if (code.includes("")) {
-        requires.push("");
+    if (code.includes("prompt(")) {
+        requires.push("const prompt = require('prompt-sync')({sigint: true});");
     }
 
 

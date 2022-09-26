@@ -17,6 +17,7 @@
     import Swal from "sweetalert2";
     import JSZip from "jszip";
     import * as toolbox from './components/toolbox';
+    import * as functions from './components/functions/simplefunctions';
     import * as require from './components/require/require';
     // import * as save from './components/save-load';
     import Blockly from "blockly";
@@ -205,6 +206,8 @@
                 <li><a class="dropdown-item" v-on:click="saveas()">Save</a></li>
                 <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
                 <li><a class="dropdown-item" @click="askForFile">Load</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" @click="functions.clearWorkspace(foo.value.workspace)">Clear Workspace</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
               </ul>

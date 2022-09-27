@@ -257,7 +257,7 @@
                 <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
                 <li><a class="dropdown-item" @click="askForFile">Load</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li>
+                <!--<li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li> -->
                 <li><a class="dropdown-item" @click="workspaceClear(true)">Clear Workspace</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>

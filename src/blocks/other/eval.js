@@ -1,10 +1,13 @@
 import * as Blockly from "blockly/core";
+import * as eng from "/src/locales/en";
+
+const en = eng.getLangs();
 
 Blockly.Blocks['eval'] = {
     init: function() {
       this.appendValueInput("comd")
           .setCheck(null)
-          .appendField("Eval");
+          .appendField(`${en.eval}`);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour("#982880");

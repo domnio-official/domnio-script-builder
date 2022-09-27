@@ -247,6 +247,7 @@ function list(){
         </shadow>
     </value>
 </block>
+<block type="text_count"></block>
 </category>
 <category name="Lists" colour="#745ba5">
 <block type="lists_create_with">
@@ -372,6 +373,9 @@ function list(){
 <block type="run_console_cmd"/>
 <block type="eval"/>
 <block type="eval_left"/>
+<block type="return_no_value"/>
+<block type="try_catch"/>
+<block type="error"/>
   </category>
     <sep />
     <category name="Base" colour="#7f6065">

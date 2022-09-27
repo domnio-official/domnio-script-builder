@@ -12,7 +12,5 @@ async function Save(backpack){
 setInterval(async function(){ 
     console.log('saving backpack')
     localforage.setItem("backpack3",backpack.getContents());
-    console.log("Checking packpack...");
-    console.log(String(backpack.getContents()))
 }, 1000);
 }

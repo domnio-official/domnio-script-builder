@@ -16,6 +16,7 @@ import {Backpack} from '@blockly/workspace-backpack';
 import Load from "./backpack-save-load.js";
 import * as autosave from './autosave';
 // import * as It from 'blockly/msg/it';
+import * as En from 'blockly/msg/en';
 
 const props = defineProps(["options"]);
 const blocklyToolbox = ref();
@@ -25,7 +26,7 @@ const workspace = shallowRef();
 defineExpose({ workspace });
 
 onMounted(() => {
-//  Blockly.setLocale(It);
+  Blockly.setLocale(En);
   const options = props.options || {};
   if (!options.toolbox) {
     options.toolbox = blocklyToolbox.value;

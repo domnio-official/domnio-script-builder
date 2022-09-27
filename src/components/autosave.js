@@ -11,6 +11,7 @@ export async function GetAutoSave(){
 }
 
 export async function SyncWorkSpace(workspace){
-        console.log('Saving workspace...');
-        await localforage.setItem("autosave", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))).then(console.log('Workspace saved successfully'));
+    console.log('Saving workspace...');
+    var content = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
+    localforage.setItem("autosave", content).then(console.log('Workspace saved successfully'));
 }

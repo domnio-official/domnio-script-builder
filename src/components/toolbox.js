@@ -177,6 +177,18 @@ function list(){
 </value>                
 </block>
 <block type="newline"></block>
+<block type="starts_with">
+<value name="STRING">
+    <shadow type="text">
+        <field name="TEXT">qwerty</field>
+    </shadow>
+</value>
+<value name="SUBSTRING">
+    <shadow type="text">
+        <field name="TEXT">q</field>
+    </shadow>
+</value>
+</block>
 <block type="text_append">
     <field name="VAR" id="X4zy!98/2$-ur;|L{NlX">item</field>
     <value name="TEXT">

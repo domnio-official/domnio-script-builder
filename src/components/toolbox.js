@@ -381,6 +381,7 @@ function list(){
     </block>
   </value>
 </block>
+<block type="inject_code"/>
 <block type="require_block"/>
 <block type="run_console_cmd"/>
 <block type="eval"/>

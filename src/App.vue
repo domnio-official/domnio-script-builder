@@ -10,7 +10,7 @@
      * @author dcoodien@google.com (Dylan Coodien)
      */
     
-    import { ref } from "vue";
+    import { ref, onMounted } from "vue";
     import BlocklyComponent from "./components/BlocklyComponent.vue";
     import './blocks/importBlocks';
     import Theme from '@blockly/theme-dark';
@@ -18,6 +18,7 @@
     import JSZip from "jszip";
     import * as toolbox from './components/toolbox';
     import * as functions from './components/functions/simplefunctions';
+    import * as autosave from './components/autosave';
     import * as require from './components/require/require';
     // import * as save from './components/save-load';
     import Blockly from "blockly";
@@ -55,16 +56,65 @@
       theme: Theme,
       toolbox: toolbox.list()
     };
+
+    onMounted(() => {
+        // autosave.AutoSaveStart(foo.value.workspace);
+    });
+
+    function getAutoSave(){
+        foo.value.workspace.clear();
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(autosave.GetAutoSave()), foo.value.workspace).then(console.log("Autosave has been imported"));
+    }
     
     const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();");
-    
-    Blockly.Events.BLOCK_DELETE = function(event) {
-        console.log("A block was deleted");
-      }
     
     function copy() {
       var copyText = document.getElementById("codeee").innerText;
         navigator.clipboard.writeText(copyText)
+    }
+
+    function workspaceClear(displaywarn) {
+        if (displaywarn == false || displaywarn == null) {
+            foo.value.workspace.clear();
+        }
+        else {
+            const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        html: "The workspace will be cleared. <strong>NOTE THAT YOU CAN'T UNDO THIS!</strong>",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            foo.value.workspace.clear();
+            const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1300
+                      });
+    
+                      Toast.fire({
+                        icon: 'success',
+                        title: 'Workspace cleared'
+                      })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {}
+      })
+}
     }
     
     function credits() {
@@ -132,7 +182,7 @@
                 confirmButtonText: 'Yes, import the script!'
               }).then((result) => {
                 if (result.isConfirmed) {
-                  foo.value.workspace.clear();
+                    workspaceClear();
                 const file = document.getElementById("load-code").files[0];
                 const documentName = file.name.split(".").slice(0, file.name.split(".").length-1);
                 const reader = new FileReader();
@@ -207,7 +257,8 @@
                 <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
                 <li><a class="dropdown-item" @click="askForFile">Load</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" @click="functions.clearWorkspace(foo.value.workspace)">Clear Workspace</a></li>
+                <li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li>
+                <li><a class="dropdown-item" @click="workspaceClear(true)">Clear Workspace</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
               </ul>

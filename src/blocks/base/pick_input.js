@@ -10,7 +10,7 @@ Blockly.Blocks['ask_input'] = {
           .appendField("Ask an input to the console with question");
       this.appendValueInput("save input")
           .setCheck(null)
-          .appendField("and save value to");
+          .appendField("and save value into variable");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(165);

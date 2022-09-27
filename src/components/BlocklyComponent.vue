@@ -14,6 +14,7 @@ import { onMounted, ref, shallowRef } from "vue";
 import Blockly from "blockly";
 import {Backpack} from '@blockly/workspace-backpack';
 import Load from "./backpack-save-load.js";
+import * as autosave from './autosave';
 // import * as It from 'blockly/msg/it';
 
 const props = defineProps(["options"]);
@@ -46,6 +47,7 @@ onMounted(() => {
   workspace.value = Blockly.inject(blocklyDiv.value, options);
   workspace.value.addChangeListener(Blockly.Events.disableOrphans);
   workspace.value.addChangeListener(checkOneStart);
+  workspace.value.addChangeListener(savework);
 
   var parentBlock = workspace.value.newBlock('start');
   parentBlock.initSvg();
@@ -63,6 +65,30 @@ onMounted(() => {
       console.log("%cAdded Start Block", "color:green;")
     }
   }
+
+function savework(event) {
+  const DISABLED_EVENTS = [
+  Blockly.Events.BUBBLE_OPEN,
+  Blockly.Events.BUMP_EVENTS,
+  Blockly.Events.CLICK,
+  Blockly.Events.BLOCK_DRAG,
+  Blockly.Events.FINISHED_LOADING,
+  Blockly.Events.SELECTED,
+  Blockly.Events.THEME_CHANGE,
+  Blockly.Events.TOOLBOX_ITEM_SELECT,
+  Blockly.Events.TRASHCAN_OPEN,
+  Blockly.Events.UI,
+  Blockly.Events.VIEWPORT_CHANGE,
+  Blockly.Events.BACKPACK_CHANGE,
+  Blockly.Events.CREATE
+];
+  if (!DISABLED_EVENTS.includes(event.type)) {
+    if (String(event.type) != "backpack_change"){
+      console.log("WORKSPACE: ", String(event.type))
+      autosave.SyncWorkSpace(workspace.value);
+    }
+  }
+}
 
 function checkOneStart(event) {
   if (event.type == Blockly.Events.BLOCK_CREATE) {

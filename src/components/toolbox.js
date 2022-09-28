@@ -443,6 +443,21 @@ function list(){
             </block>
         </value>
         </block>
+        <block type="get_all_keys">
+        <value name="obj_name">
+            <block type="variables_get">
+                <field name="VAR">object</field>
+            </block>
+        </value>
+        </block>
+        <label text="------------ JSON ------------"/>
+        <block type="json_to_obj">
+        <value name="text">
+        <shadow type="text">
+            <field name="TEXT">{"objKey": "Hello world"}</field>
+        </shadow>
+        </value>
+    </block>
     </category>
   <category name="Other" colour="#a300a3">
   <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">

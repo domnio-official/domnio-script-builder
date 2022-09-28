@@ -1,3 +1,5 @@
+// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#q94nyi
+
 import * as Blockly from "blockly/core";
 
 Blockly.Blocks['remove_key_f_obj'] = {

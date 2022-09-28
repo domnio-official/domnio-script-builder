@@ -460,7 +460,7 @@ function list(){
     </block>
     </category>
   <category name="Other" colour="#a300a3">
-  <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">
+  <block type="delay">
   <field name="type_time">seconds</field>
   <value name="time">
     <block type="math_number" id="z:(0k8Nwa?ca8{C0fXrY">
@@ -475,6 +475,7 @@ function list(){
 <block type="eval_left"/>
 <block type="return_no_value"/>
 <block type="try_catch"/>
+<block type="throw"/>
 <block type="error"/>
   </category>
     <sep />

@@ -37,10 +37,11 @@ Blockly.Blocks[blockName] = {
 Blockly.JavaScript[blockName] = function(block){
     const tryy = Blockly.JavaScript.statementToCode(block, "try");
     const catchh = Blockly.JavaScript.statementToCode(block, "catch");
-    return `try{
-        ${tryy}
-    }catch(err){
-        ${catchh}
+    return `try {
+${tryy}
+    }
+    catch(err){
+${catchh}
     };
     `;
 };

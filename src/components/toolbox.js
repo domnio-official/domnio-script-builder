@@ -431,6 +431,18 @@ function list(){
             </shadow>
             </value>
         </block>
+        <block type="remove_key_f_obj">
+        <value name="key">
+        <shadow type="text">
+            <field name="TEXT">objKey</field>
+        </shadow>
+        </value>
+        <value name="obj_name">
+            <block type="variables_get">
+                <field name="VAR">object</field>
+            </block>
+        </value>
+        </block>
     </category>
   <category name="Other" colour="#a300a3">
   <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">

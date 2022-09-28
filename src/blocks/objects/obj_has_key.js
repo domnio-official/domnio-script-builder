@@ -1,3 +1,5 @@
+// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#3nm4yo
+
 import * as Blockly from "blockly/core";
 
 Blockly.Blocks['obj_has_key'] = {

@@ -372,6 +372,26 @@ function list(){
     <sep />
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}" />
     <category name="Functions" colour="#995ba5" custom="PROCEDURE" />
+    <category name="Objects" colour="#5D3FD3">
+    <label text="Create an object"></label>
+        <block type="empty_obj"/>
+        <block type="create_object_left"/>
+        <block type="add_keys">
+        <value name="KEY">
+            <shadow type="text">
+                <field name="TEXT">obj</field>
+            </shadow>
+        </value>
+        </block>
+        <label text="Get key a value"/>
+        <block type="get_obj_key">
+        <value name="key_name">
+            <shadow type="text">
+                <field name="TEXT">obj</field>
+            </shadow>
+        </value>
+        </block>
+    </category>
   <category name="Other" colour="#a300a3">
   <block type="delay" id="pTlBRAT#Pj_#5he!oYB=">
   <field name="type_time">seconds</field>

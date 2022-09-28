@@ -503,6 +503,7 @@ function list(){
     <sep />
     <category name="Database" colour="#C70039">
         <category name="JSON" colour="#50C878">
+        <label text='Database Blocks' />
         <block type="new_database">
         <value name="NAME">
             <shadow type="text">
@@ -512,18 +513,6 @@ function list(){
         <value name="PATH">
             <shadow type="text">
                 <field name="TEXT">database</field>
-            </shadow>
-        </value>
-        </block>
-        <block type="get_data">
-        <value name="key">
-            <shadow type="text">
-                <field name="TEXT">myKey</field>
-            </shadow>
-        </value>
-        <value name="db">
-            <shadow type="text">
-                <field name="TEXT">myDB</field>
             </shadow>
         </value>
         </block>
@@ -544,6 +533,18 @@ function list(){
             </shadow>
         </value>
         </block>
+        <block type="get_data">
+        <value name="key">
+            <shadow type="text">
+                <field name="TEXT">myKey</field>
+            </shadow>
+        </value>
+        <value name="db">
+            <shadow type="text">
+                <field name="TEXT">myDB</field>
+            </shadow>
+        </value>
+        </block>
         <block type="db_has_key">
         <value name="key">
             <shadow type="text">
@@ -556,7 +557,7 @@ function list(){
             </shadow>
         </value>
         </block>
-        <block type="db_delete">
+        <!-- <block type="db_delete">
         <value name="key">
             <shadow type="text">
                 <field name="TEXT">myKey</field>
@@ -568,6 +569,13 @@ function list(){
             </shadow>
         </value>
         </block>
+        <block type="replace_db">
+        <value name="db">
+            <shadow type="text">
+                <field name="TEXT">myDB</field>
+            </shadow>
+        </value>
+        </block> -->
         </category>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);

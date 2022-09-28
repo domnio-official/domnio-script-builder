@@ -1,3 +1,5 @@
+// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#x7qvyd
+
 import * as Blockly from "blockly/core";
 
 Blockly.Blocks['db_set_data'] = {

@@ -544,6 +544,18 @@ function list(){
             </shadow>
         </value>
         </block>
+        <block type="db_has_key">
+        <value name="key">
+            <shadow type="text">
+                <field name="TEXT">myKey</field>
+            </shadow>
+        </value>
+        <value name="db">
+            <shadow type="text">
+                <field name="TEXT">myDB</field>
+            </shadow>
+        </value>
+        </block>
         </category>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);

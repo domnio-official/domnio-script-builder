@@ -373,21 +373,34 @@ function list(){
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}" />
     <category name="Functions" colour="#995ba5" custom="PROCEDURE" />
     <category name="Objects" colour="#5D3FD3">
-    <label text="Create an object"></label>
+    <label text="------ Create an object ------"></label>
         <block type="empty_obj"/>
+    <label text="⚠️ NOTE: Only use these 2 blocks together!"></label>
         <block type="create_object_left"/>
         <block type="add_keys">
         <value name="KEY">
             <shadow type="text">
-                <field name="TEXT">obj</field>
+                <field name="TEXT">objKey</field>
             </shadow>
         </value>
         </block>
-        <label text="Get key a value"/>
+        <label text="------------ KEYS ------------"/>
         <block type="get_obj_key">
         <value name="key_name">
             <shadow type="text">
-                <field name="TEXT">obj</field>
+                <field name="TEXT">objKey</field>
+            </shadow>
+        </value>
+        </block>
+        <block type="add_key_to_obj">
+        <value name="key_name">
+            <shadow type="text">
+                <field name="TEXT">objKey</field>
+            </shadow>
+        </value>
+        <value name="val_name">
+            <shadow type="text">
+                <field name="TEXT">Hello world!</field>
             </shadow>
         </value>
         </block>
@@ -411,7 +424,7 @@ function list(){
 <block type="error"/>
   </category>
     <sep />
-    <category name="Base" colour="#7f6065">
+    <category name="Console" colour="#7f6065">
     <label text='Console Blocks' />
     <block type="console_log">
     <value name="text">

@@ -65,7 +65,6 @@
         foo.value.workspace.clear();
         Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(autosave.GetAutoSave()), foo.value.workspace).then(console.log("Autosave has been imported"));
     }
-    
     const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();");
     
     function copy() {

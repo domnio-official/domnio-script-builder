@@ -9,12 +9,15 @@ function getRequires(code) {
         requires.push("const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));");
     }
     if (code.includes("exec(")) {
-        requires.push("const { exec } = require(\"child_process\")");
+        requires.push("const { exec } = require(\"child_process\");");
+    }
+    if (code.includes("new JSONdb(")) {
+        requires.push("const JSONdb = require('simple-json-db');");
     }
 
 
     // ---- RETURN ------
-    return requires.join('\n') + "\n";
+    return requires.join('\n') + "\n" + "\n";
 }
 
 export { getRequires }

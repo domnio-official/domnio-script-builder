@@ -501,8 +501,8 @@ function list(){
   <block type="ask_input_left"></block>
     </category>
     <sep />
-    <category name="〉Database" colour="#C70039">
-        <category name="〉JSON" colour="#50C878">
+    <category name="Database" colour="#C70039">
+        <category name="JSON" colour="#50C878">
         <block type="new_database">
         <value name="NAME">
             <shadow type="text">

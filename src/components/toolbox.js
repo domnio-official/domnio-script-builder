@@ -383,6 +383,11 @@ function list(){
                 <field name="TEXT">objKey</field>
             </shadow>
         </value>
+        <value name="VALUE">
+            <shadow type="text">
+                <field name="TEXT">Hello World!</field>
+            </shadow>
+        </value>
         </block>
         <label text="------------ KEYS ------------"/>
         <block type="get_obj_key">
@@ -390,6 +395,11 @@ function list(){
             <shadow type="text">
                 <field name="TEXT">objKey</field>
             </shadow>
+        </value>
+        <value name="obj_name">
+            <block type="variables_get">
+                <field name="VAR">object</field>
+            </block>
         </value>
         </block>
         <block type="add_key_to_obj">
@@ -403,6 +413,23 @@ function list(){
                 <field name="TEXT">Hello world!</field>
             </shadow>
         </value>
+        <value name="obj_name">
+            <block type="variables_get">
+                <field name="VAR">object</field>
+            </block>
+        </value>
+        </block>
+        <block type="obj_has_key">
+            <value name="obj">
+                <block type="variables_get">
+                    <field name="VAR">object</field>
+                </block>
+            </value>
+            <value name="key">
+            <shadow type="text">
+                <field name="TEXT">objKey</field>
+            </shadow>
+            </value>
         </block>
     </category>
   <category name="Other" colour="#a300a3">

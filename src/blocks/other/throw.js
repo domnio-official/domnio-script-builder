@@ -16,6 +16,6 @@ Blockly.Blocks['throw'] = {
   Blockly.JavaScript['throw'] = function(block) {
     var value_value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = `throw (${value_value});\n`;
+    var code = `throw (${value_value});\n`
     return code;
   };

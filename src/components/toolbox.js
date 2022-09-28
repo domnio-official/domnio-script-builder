@@ -457,7 +457,14 @@ function list(){
             <field name="TEXT">{"objKey": "Hello world"}</field>
         </shadow>
         </value>
-    </block>
+        </block>
+        <block type="obj_to_json_str">
+        <value name="obj_value">
+            <block type="variables_get">
+                <field name="VAR">object</field>
+            </block>
+        </value>
+        </block>
     </category>
   <category name="Other" colour="#a300a3">
   <block type="delay">

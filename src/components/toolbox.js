@@ -180,12 +180,24 @@ function list(){
 <block type="starts_with">
 <value name="STRING">
     <shadow type="text">
-        <field name="TEXT">qwerty</field>
+        <field name="TEXT">domnio</field>
     </shadow>
 </value>
 <value name="SUBSTRING">
     <shadow type="text">
-        <field name="TEXT">q</field>
+        <field name="TEXT">d</field>
+    </shadow>
+</value>
+</block>
+<block type="ends_with">
+<value name="STRING">
+    <shadow type="text">
+        <field name="TEXT">domnio</field>
+    </shadow>
+</value>
+<value name="SUBSTRING">
+    <shadow type="text">
+        <field name="TEXT">o</field>
     </shadow>
 </value>
 </block>

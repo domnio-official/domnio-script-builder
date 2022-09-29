@@ -480,6 +480,9 @@ function list(){
 <block type="run_console_cmd"/>
 <block type="eval"/>
 <block type="eval_left"/>
+<block type="typeof"/>
+<block type="typeof_result"/>
+<block type="easy_typeof"/>
 <block type="return_no_value"/>
 <block type="try_catch"/>
 <block type="throw"/>

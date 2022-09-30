@@ -610,6 +610,28 @@ function list(){
         </block> -->
         </category>
     </category>
+    <sep />
+    <category name="Web Requests" colour="#765a9a">
+        <category name="Simple Requests" colour="#9160cf">
+        <block type="axios_get_simple">
+        <value name="variable">
+        <block type="variables_get" id="(D16FC2xa~I7miD-|b))">
+          <field name="VAR" id="^epfRSqs*xYiRp(:@ixU">response</field>
+        </block>
+      </value>
+            <statement name="error">
+            <block type="console_log">
+            <value name="text">
+                <shadow type="text">
+                <field name="TEXT">Hello World!</field>
+                </shadow>
+                <block type="error"></block>
+                </value>
+            </block>
+            </statement>
+        </block>
+        </category>
+    </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 
   return toolbox_content;

@@ -29,7 +29,6 @@ Blockly.Blocks['axios_get_simple'] = {
     var value_variable = Blockly.JavaScript.valueToCode(block, 'variable', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_then = Blockly.JavaScript.statementToCode(block, 'then');
     var statements_error = Blockly.JavaScript.statementToCode(block, 'error');
-    // TODO: Assemble JavaScript into code variable.
     var code = `axios.get(${value_url})
     .then(function (${value_variable}) {
         ${value_variable} = (${value_variable}.data);

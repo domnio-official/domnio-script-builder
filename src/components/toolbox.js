@@ -630,6 +630,23 @@ function list(){
             </block>
             </statement>
         </block>
+        <block type="axios_post_simple">
+        <value name="variable">
+        <block type="variables_get" id="(D16FC2xa~I7miD-|b))">
+          <field name="VAR" id="^epfRSqs*xYiRp(:@ixU">response</field>
+        </block>
+      </value>
+            <statement name="error">
+            <block type="console_log">
+            <value name="text">
+                <shadow type="text">
+                <field name="TEXT">Hello World!</field>
+                </shadow>
+                <block type="error"></block>
+                </value>
+            </block>
+            </statement>
+        </block>
         </category>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);

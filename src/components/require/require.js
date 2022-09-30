@@ -14,7 +14,7 @@ function getRequires(code) {
     if (code.includes("new JSONdb(")) {
         requires.push("const JSONdb = require('simple-json-db');");
     }
-    if (code.includes("axios.get(")) {
+    if (code.includes("axios.get(") || code.includes("axios.post(")) {
         requires.push("const axios = require('axios');");
     }
 

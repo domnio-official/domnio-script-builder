@@ -613,6 +613,7 @@ function list(){
     <sep />
     <category name="Web Requests" colour="#765a9a">
         <category name="Simple Requests" colour="#9160cf">
+        <label text="GET Request"></label>
         <block type="axios_get_simple">
         <value name="variable">
         <block type="variables_get" id="(D16FC2xa~I7miD-|b))">
@@ -630,6 +631,7 @@ function list(){
             </block>
             </statement>
         </block>
+        <label text="POST Request"></label>
         <block type="axios_post_simple">
         <value name="variable">
         <block type="variables_get" id="(D16FC2xa~I7miD-|b))">

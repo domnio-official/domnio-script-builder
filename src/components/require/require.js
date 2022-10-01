@@ -17,6 +17,9 @@ function getRequires(code) {
     if (code.includes("axios.get(") || code.includes("axios.post(")) {
         requires.push("const axios = require('axios');");
     }
+    if (code.includes("axios(") || code.includes("axios.post(")) {
+        requires.push("const axios = require('axios');");
+    }
 
 
     // ---- RETURN ------

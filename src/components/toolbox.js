@@ -616,8 +616,8 @@ function list(){
         <label text="GET Request"></label>
         <block type="axios_get_simple">
         <value name="variable">
-        <block type="variables_get" id="(D16FC2xa~I7miD-|b))">
-          <field name="VAR" id="^epfRSqs*xYiRp(:@ixU">response</field>
+        <block type="variables_get">
+          <field name="VAR">response</field>
         </block>
       </value>
             <statement name="error">
@@ -634,8 +634,8 @@ function list(){
         <label text="POST Request"></label>
         <block type="axios_post_simple">
         <value name="variable">
-        <block type="variables_get" id="(D16FC2xa~I7miD-|b))">
-          <field name="VAR" id="^epfRSqs*xYiRp(:@ixU">response</field>
+        <block type="variables_get">
+          <field name="VAR">response</field>
         </block>
       </value>
             <statement name="error">
@@ -649,6 +649,42 @@ function list(){
             </block>
             </statement>
         </block>
+        </category>
+        <category name="Advanced Requests" colour="#9160cf">
+        <label text="GET Request"></label>
+        <block type="avdanced_http_request">
+        <field name="method">get</field>
+        <field name="resptype">json</field>
+        <value name="url">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="timeout">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="variable">
+          <block type="variables_get">
+            <field name="VAR">response</field>
+          </block>
+        </value>
+        <value name="headers">
+          <block type="empty_obj"></block>
+        </value>
+        <statement name="error">
+          <block type="console_log">
+            <value name="text">
+              <shadow type="text">
+                <field name="TEXT">Hello World!</field>
+              </shadow>
+              <block type="error"></block>
+            </value>
+          </block>
+        </statement>
+      </block>
+            <block type="add_data_section" />
         </category>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);

@@ -15,7 +15,7 @@ Blockly.Blocks['avdanced_http_request'] = {
           .appendField(new Blockly.FieldDropdown([["JSON","json"], ["Array Buffer","arraybuffer"], ["Document","document"], ["Text","text"], ["Stream","stream"]]), "resptype");
       this.appendValueInput("timeout")
           .setCheck("Number")
-          .appendField("Set timeout to");
+          .appendField("Set timeout to (0 = ∞)");
       this.appendValueInput("variable")
           .setCheck(null)
           .appendField("Save response into variable");
@@ -23,7 +23,7 @@ Blockly.Blocks['avdanced_http_request'] = {
           .setCheck(null)
           .appendField("With headers");
       this.appendStatementInput("data_sections")
-          .setCheck("add_data_section")
+          .setCheck(null)
           .appendField("Data sections");
       this.appendStatementInput("then")
           .setCheck(null)

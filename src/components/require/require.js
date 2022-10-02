@@ -20,6 +20,9 @@ function getRequires(code) {
     if (code.includes("axios(") || code.includes("axios.post(")) {
         requires.push("const axios = require('axios');");
     }
+    if (code.includes(".data.pipe(fs.createWriteStream(")) {
+        requires.push("const fs = require('fs');");
+    }
 
 
     // ---- RETURN ------

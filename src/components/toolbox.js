@@ -656,9 +656,9 @@ function list(){
         <field name="method">get</field>
         <field name="resptype">json</field>
         <value name="url">
-          <block type="text">
+          <shadow type="text">
             <field name="TEXT"></field>
-          </block>
+          </shadow>
         </value>
         <value name="timeout">
           <block type="math_number">
@@ -671,7 +671,7 @@ function list(){
           </block>
         </value>
         <value name="headers">
-          <block type="empty_obj"></block>
+          <shadow type="empty_obj"></shadow>
         </value>
         <statement name="error">
           <block type="console_log">
@@ -684,6 +684,18 @@ function list(){
           </block>
         </statement>
       </block>
+      <block type="http_stream_save">
+      <value name="variable">
+        <block type="variables_get">
+          <field name="VAR">response</field>
+        </block>
+      </value>
+      <value name="filename">
+        <shadow type="text">
+          <field name="TEXT">domnio.png</field>
+        </shadow>
+      </value>
+    </block>
             <block type="add_data_section" />
         </category>
     </category>

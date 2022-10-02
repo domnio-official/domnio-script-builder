@@ -1,4 +1,4 @@
-// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#jm3koh
+// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#pyh8n8
 
 import * as Blockly from "blockly/core";
 
@@ -12,7 +12,7 @@ Blockly.Blocks['avdanced_http_request'] = {
           .appendField(new Blockly.FieldDropdown([["GET","get"], ["POST","post"], ["PUT","put"], ["PATCH","patch"], ["DELETE","delete"], ["HEAD","head"], ["OPTIONS","options"]]), "method");
       this.appendDummyInput()
           .appendField("Set Response type to")
-          .appendField(new Blockly.FieldDropdown([["JSON","json"], ["Array Buffer","arraybuffer"], ["Document","document"], ["Text","text"], ["Stream","stream"]]), "resptype");
+          .appendField(new Blockly.FieldDropdown([["JSON","json"], ["Array Buffer","arraybuffer"], ["Document","document"], ["Text","text"], ["Stream (Downloadable response)","stream"]]), "resptype");
       this.appendValueInput("timeout")
           .setCheck("Number")
           .appendField("Set timeout to (0 = ∞)");

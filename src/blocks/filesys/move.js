@@ -22,7 +22,7 @@ Blockly.Blocks['filesys_move'] = {
     var value_to_path = Blockly.JavaScript.valueToCode(block, 'to_path', Blockly.JavaScript.ORDER_ATOMIC);
     var back_value_from;
 
-
+if (value_to_path.startsWith("'") && value_from_path.startsWith("'")) {
     if (!value_to_path.includes('/')) {
         value_to_path = value_to_path.slice(0, -1);
         value_to_path = value_to_path.replace('\'', '');
@@ -77,6 +77,7 @@ Blockly.Blocks['filesys_move'] = {
         value_from_path = value_from_path.replace('\'', '');
         value_from_path = "'" + "./".concat(String(value_from_path)) + "'"
     }
+}
     var code = `await fss.rename(${value_from_path}, ${value_to_path});\n`;
     return code;
   };

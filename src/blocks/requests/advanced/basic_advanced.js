@@ -58,6 +58,6 @@ Blockly.Blocks['avdanced_http_request'] = {
         timeout: ${value_timeout},
         headers: ${value_headers},
 ${statements_data_sections}
-    })\n.then(async (${value_variable}) => {\n${statements_then}})\n.catch(async (err) => {\n${statements_error}});`;
+    })\n.then(async (${value_variable}) => {\n${statements_then}})\n.catch(async (err) => {\n${statements_error}});\n`;
     return code;
   };

@@ -6,7 +6,7 @@ Blockly.Blocks['axios_get_simple'] = {
     init: function() {
       this.appendValueInput("url")
           .setCheck(null)
-          .appendField("Make a simple http GET request to URL");
+          .appendField("Make a simple JSON http GET request to URL");
       this.appendValueInput("variable")
           .setCheck(null)
           .appendField("and save response into the variable");

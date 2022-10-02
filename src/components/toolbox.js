@@ -96,6 +96,7 @@ function list(){
         </shadow>
     </value>
 </block>
+<block type="convert_to_number"/>
 <block type="math_round">
     <field name="OP">ROUND</field>
     <value name="NUM">
@@ -493,7 +494,7 @@ function list(){
 <block type="eval"/>
 <block type="eval_left"/>
 <block type="typeof"/>
-<block type="typeof_result"/>
+<!-- <block type="typeof_result"/> -->
 <block type="easy_typeof"/>
 <block type="return_no_value"/>
 <block type="try_catch"/>
@@ -698,6 +699,53 @@ function list(){
     </block>
             <block type="add_data_section" />
         </category>
+    </category>
+    <sep/>
+    <category name="Files" colour="#a3971e">
+    <label text="Create / Edit file"/>
+    <block type="filesys_write">
+    <value name="name">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    <value name="data">
+        <shadow type="text">
+            <field name="TEXT">Hello world!</field>
+        </shadow>
+    </value>
+    </block>
+    <block type="filesys_rename">
+    <value name="old_name">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    <value name="new_name">
+        <shadow type="text">
+            <field name="TEXT">heloo.txt</field>
+        </shadow>
+    </value>
+    </block>
+    <label text='Read a file | (use the "Convert To String" block if needed)'/>
+    <block type="filesys_read">
+    <value name="path">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    </block>
+    <block type="convert_to_string">
+    <value name="value">
+    <block type="filesys_read">
+    <value name="path">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    </block>
+    </value>
+    </block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

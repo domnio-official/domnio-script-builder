@@ -120,7 +120,7 @@
       Swal.fire({
         title: "Credits",
         icon: 'info',
-        html: "Leader: Farfa<br>Developer: Farfa<br><br>Domnio Script Builder is based on <a href=\"https://developers.google.com/blockly\" target=\"_blank\">Google's Blockly</a>",
+        html: "Leader: Farfa<br>Developer: Farfa<br><br>Domnio Script Builder is based on <a href=\"https://developers.google.com/blockly\" target=\"_blank\">Google's Blockly</a><br>© Copyright Domnio 2022",
         confirmButtonText: "OK 👍"
       });
     }

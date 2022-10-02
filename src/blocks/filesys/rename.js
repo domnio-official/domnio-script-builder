@@ -9,7 +9,7 @@ Blockly.Blocks['filesys_rename'] = {
           .appendField("Rename file");
       this.appendValueInput("new_name")
           .setCheck(null)
-          .appendField("into");
+          .appendField("in");
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);

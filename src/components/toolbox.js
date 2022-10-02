@@ -702,7 +702,9 @@ function list(){
     </category>
     <sep/>
     <category name="Files" colour="#a3971e">
-    <label text="Create / Edit file"/>
+    <label text='Variables'/>
+    <block type="filesys_variable_cdir"/>
+    <label text="Manage file"/>
     <block type="filesys_write">
     <value name="name">
         <shadow type="text">
@@ -724,6 +726,18 @@ function list(){
     <value name="new_name">
         <shadow type="text">
             <field name="TEXT">heloo.txt</field>
+        </shadow>
+    </value>
+    </block>
+    <block type="filesys_move">
+    <value name="from_path">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    <value name="to_path">
+        <shadow type="text">
+            <field name="TEXT">domnio</field>
         </shadow>
     </value>
     </block>

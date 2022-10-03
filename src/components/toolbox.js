@@ -497,7 +497,18 @@ function list(){
 <!-- <block type="typeof_result"/> -->
 <block type="easy_typeof"/>
 <block type="return_no_value"/>
-<block type="try_catch"/>
+<block type="try_catch">
+<statement name="catch">
+  <block type="console_log">
+    <value name="text">
+      <shadow type="text">
+        <field name="TEXT">Hello World!</field>
+      </shadow>
+      <block type="error"></block>
+    </value>
+  </block>
+</statement>
+</block>
 <block type="throw"/>
 <block type="error"/>
   </category>
@@ -741,6 +752,25 @@ function list(){
         </shadow>
     </value>
     </block>
+    <block type="filesys_copy">
+    <value name="from_path">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    <value name="to_path">
+        <shadow type="text">
+            <field name="TEXT">domnio</field>
+        </shadow>
+    </value>
+    </block>
+    <block type="filesys_delete">
+    <value name="file">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    </block>
     <label text='Read a file | (use the "Convert To String" block if needed)'/>
     <block type="filesys_read">
     <value name="path">
@@ -758,6 +788,31 @@ function list(){
         </shadow>
     </value>
     </block>
+    </value>
+    </block>
+    <label text='Advanced (optional)'/>
+    <block type="filesys_perms">
+    <value name="file">
+        <shadow type="text">
+            <field name="TEXT">hello.txt</field>
+        </shadow>
+    </value>
+    </block>
+    <block type="filesys_link">
+    <value name="from_path">
+        <shadow type="text">
+            <field name="TEXT">../hello.txt</field>
+        </shadow>
+    </value>
+    <value name="to_path">
+        <shadow type="text">
+            <field name="TEXT">domnio</field>
+        </shadow>
+    </value>
+    <value name="name">
+        <shadow type="text">
+            <field name="TEXT">hello</field>
+        </shadow>
     </value>
     </block>
     </category>

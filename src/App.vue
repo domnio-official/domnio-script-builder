@@ -10,6 +10,7 @@
      * @author dcoodien@google.com (Dylan Coodien)
      */
     
+    import localforage from "localforage";
     import { ref, onMounted } from "vue";
     import BlocklyComponent from "./components/BlocklyComponent.vue";
     import './blocks/importBlocks';
@@ -24,6 +25,7 @@
     import Blockly from "blockly";
     import BlocklyJS from "blockly/javascript";
     
+    var lang;
     const foo = ref();
     const code = ref();
     const options = {
@@ -225,6 +227,26 @@
     
               })
             }
+      async function setLang(lang) {
+        try {
+        localforage.setItem("language", lang);
+          Swal.fire({
+            title: "Success!",
+            icon: 'success',
+            html: "<b>Reload the page to take effect!</b>",
+            confirmButtonText: "OK"
+          });
+        }
+        catch (err) {
+          Swal.fire({
+            title: "Error!",
+            icon: 'error',
+            html: "Error: " + String(err),
+            confirmButtonText: "OK"
+          });
+        }
+
+      }
     </script>
     
     <template>
@@ -246,6 +268,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="https://dsc.gg/domnio" target="_blank" style="margin-top: 5px;">Discord server</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-top: 5px;">Settings</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" style="margin-top: 5px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -290,6 +315,23 @@
         </div>
       </div>
     </div>
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel" class="text-white">Domnio Settings</h5>
+    <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="dropdown mt-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+        Language
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="" v-on:click="setLang('en')">English</a></li>
+        <li><a class="dropdown-item" href="" v-on:click="setLang('it')">Italiano</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
         <BlocklyComponent id="workspace" :options="options" ref="foo"></BlocklyComponent>
         <p id="code">
         </p>

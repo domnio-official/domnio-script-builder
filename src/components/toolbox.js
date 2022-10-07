@@ -816,6 +816,9 @@ function list(){
     </value>
     </block>
     </category>
+    <category name="Directories" colour="#a0a45c">
+        <block type="dir_watch"/>
+    </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 
   return toolbox_content;

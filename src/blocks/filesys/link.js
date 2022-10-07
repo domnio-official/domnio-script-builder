@@ -34,10 +34,10 @@ Blockly.Blocks['filesys_link'] = {
         if (value_to_path.startsWith("'") && value_name.startsWith("'")) {
             value_to_path = value_to_path.slice(0, -1);
             value_name = value_name.replace('\'', '');
-            var code = `fss.symlink(${value_from_path}, ${value_to_path}/${value_name}, '${dropdown_type}');\n`;
+            var code = `await fss.symlink(${value_from_path}, ${value_to_path}/${value_name}, '${dropdown_type}');\n`;
         }
         else {
-            var code = `fss.symlink(${value_from_path}, ${value_to_path}/${value_name}, '${dropdown_type}');\n`;
+            var code = `await fss.symlink(${value_from_path}, ${value_to_path}/${value_name}, '${dropdown_type}');\n`;
         }
         return code;
       };

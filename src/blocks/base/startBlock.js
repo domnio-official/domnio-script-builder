@@ -1,9 +1,11 @@
 import * as Blockly from "blockly/core";
+import { translate } from  "/src/locales";
+import localforage from "localforage";
 
 Blockly.Blocks['start'] = {
-    init: function() {
+    init: async function() {
       this.appendDummyInput()
-          .appendField("Start");
+          .appendField(String(translate("start", await localforage.getItem("language"))));
       this.appendStatementInput("start")
           .setCheck(null);
       this.setColour(66);

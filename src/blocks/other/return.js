@@ -1,12 +1,11 @@
 import * as Blockly from "blockly/core";
-import * as eng from "/src/locales/en";
-
-const en = eng.getLangs();
+import { translate } from  "/src/locales";
+import localforage from "localforage";
 
 const blockName = "return_no_value";
 
 const blockData = {
-    "message0": `${en.return}`,
+    "message0": String(translate("return", await localforage.getItem("language"))),
     "args0": [
     ],
     "colour": "#D14081",

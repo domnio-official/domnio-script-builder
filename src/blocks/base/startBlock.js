@@ -5,7 +5,7 @@ import localforage from "localforage";
 Blockly.Blocks['start'] = {
     init: async function() {
       this.appendDummyInput()
-          .appendField(String(translate("start", await localforage.getItem("language"))));
+          .appendField("Start");
       this.appendStatementInput("start")
           .setCheck(null);
       this.setColour(66);
@@ -17,7 +17,6 @@ Blockly.Blocks['start'] = {
 
   Blockly.JavaScript['start'] = function(block) {
     var statements_start = Blockly.JavaScript.statementToCode(block, 'start');
-    // TODO: Assemble JavaScript into code variable.
     var code = `${statements_start}`;
     return code;
   };

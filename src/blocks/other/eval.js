@@ -1,33 +1,42 @@
 import * as Blockly from "blockly/core";
-import * as eng from "/src/locales/en";
+import { translate } from  "/src/locales";
+import localforage from "localforage";
 
-const en = eng.getLangs();
+  const blockName = "eval";
 
-Blockly.Blocks['eval'] = {
-    init: function() {
-      this.appendValueInput("comd")
-          .setCheck(null)
-          .appendField(`${en.eval}`);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour("#982880");
-   this.setTooltip("");
-   this.setHelpUrl("");
+  const blockData = {
+    "type": "eval",
+    "message0": `${String(translate("eval", await localforage.getItem("language")))} %1`,
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "comd"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#982880",
+    "tooltip": "",
+    "helpUrl": ""
+  }
+
+  Blockly.Blocks[blockName] = {
+    init: function () {
+        this.jsonInit(blockData);
     }
-  };
+};
 
   Blockly.JavaScript['eval'] = function(block) {
     var value_comd = Blockly.JavaScript.valueToCode(block, 'comd', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
     var code = `eval(${value_comd});\n`;
     return code;
   };
 
   Blockly.Blocks['eval_left'] = {
-    init: function() {
+    init: async function() {
       this.appendValueInput("comd")
           .setCheck(null)
-          .appendField("Eval");
+          .appendField(String(translate("eval", await localforage.getItem("language"))));
       this.setOutput(true, null);
       this.setColour("#982880");
    this.setTooltip("");

@@ -15,8 +15,9 @@ import Blockly from "blockly";
 import {Backpack} from '@blockly/workspace-backpack';
 import Load from "./backpack-save-load.js";
 import * as autosave from './autosave';
-// import * as It from 'blockly/msg/it';
+import * as It from 'blockly/msg/it';
 import * as En from 'blockly/msg/en';
+import localforage from "localforage";
 
 const props = defineProps(["options"]);
 const blocklyToolbox = ref();
@@ -26,7 +27,19 @@ const workspace = shallowRef();
 defineExpose({ workspace });
 
 onMounted(() => {
-  Blockly.setLocale(En);
+
+  async function setLocale() {
+    await localforage.getItem("language").then(function(result) {
+      if (String(result) == "it") {
+        Blockly.setLocale(It);
+      }
+      else {
+        Blockly.setLocale(En);
+      }
+    });
+}
+
+  setLocale();
   const options = props.options || {};
   if (!options.toolbox) {
     options.toolbox = blocklyToolbox.value;

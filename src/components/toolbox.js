@@ -524,7 +524,7 @@ function list(){
   </block>
   <block type="console_clear"></block>
   <label text='Asks an input to the console and saves the result in the "value" block' />
-  <block type="ask_input"></block>
+  <block type="pick_input"></block>
   <block type="ask_input_left"></block>
     </category>
     <sep />

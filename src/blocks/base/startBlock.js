@@ -3,7 +3,7 @@ import { translate } from  "/src/locales";
 import localforage from "localforage";
 
 Blockly.Blocks['start'] = {
-    init: async function() {
+    init: function() {
       this.appendDummyInput()
           .appendField("Start");
       this.appendStatementInput("start")

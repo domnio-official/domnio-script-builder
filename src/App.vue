@@ -24,6 +24,17 @@
     // import * as save from './components/save-load';
     import Blockly from "blockly";
     import BlocklyJS from "blockly/javascript";
+
+    (async () => {
+
+if (await localforage.getItem("language") == null || await localforage.getItem("language") == "") {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  await delay(1000);
+    window.location.reload();
+}
+
+})();
     
     var lang;
     const foo = ref();

@@ -328,7 +328,10 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
     </div>
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel" class="text-white">Domnio Settings</h5>
+    <a class="navbar-brand">
+          <img src="./assets/logo.png" alt="Logo" width="30" draggable="false" class="d-inline-block align-text-top">
+          <b class="text-white"> Domnio Script Builder [BETA]</b>
+        </a>
     <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">

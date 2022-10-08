@@ -2,6 +2,8 @@ import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
 
+(async () => {
+
 const blockData = {
   "type": "console_log",
   "message0": `${String(translate("console_log", await localforage.getItem("language")))} %1`,
@@ -17,7 +19,6 @@ const blockData = {
   "tooltip": "",
   "helpUrl": ""
 };
-
 const blockName = blockData.type;
 
 Blockly.Blocks[blockName] = {
@@ -32,3 +33,5 @@ Blockly.JavaScript['console_log'] = function(block) {
   var code = `console.log(${value_text});\n`;
   return code;
 };
+
+})();

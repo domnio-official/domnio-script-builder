@@ -28,11 +28,9 @@
 */
 
 
-
 import * as en from "./en";
 import * as it from "./it";
 import localforage from "localforage";
-
 
 
 var objlang;
@@ -40,9 +38,13 @@ var lang;
 var item;
 var langs = ["it", "en"];
 
+(async () => {
+
 if (await localforage.getItem("language") == null || await localforage.getItem("language") == "") {
     localforage.setItem("language", "en");
 }
+
+})();
 
 
 export function translate(item, lang) {

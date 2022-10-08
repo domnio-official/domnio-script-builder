@@ -4,6 +4,8 @@ import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
 
+(async () => {
+
 
 const blockData = {
   "type": "pick_input",
@@ -71,3 +73,5 @@ Blockly.Blocks[blockData.type] = {
     var code = `prompt(${value_ask_input})`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
+
+})();

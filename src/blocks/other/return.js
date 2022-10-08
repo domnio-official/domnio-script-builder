@@ -2,6 +2,9 @@ import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
 
+(async () => {
+
+
 const blockName = "return_no_value";
 
 const blockData = {
@@ -24,3 +27,5 @@ Blockly.Blocks[blockName] = {
 Blockly.JavaScript[blockName] = function () {
     return `return\n`;
 };
+
+})();

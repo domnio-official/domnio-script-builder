@@ -2,6 +2,9 @@ import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
 
+(async () => {
+
+
   const blockName = "eval";
 
   const blockData = {
@@ -51,3 +54,5 @@ import localforage from "localforage";
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
+
+})();

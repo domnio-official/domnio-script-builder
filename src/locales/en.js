@@ -13,7 +13,8 @@ function getLangs() {
         "ez-typeof_tooltip": "Given an input, it returns \"boolean\", \"string\", \"number\" or \"undefined\" based on the input type",
         "console_log": "Log into the console",
         "console_ask": "Ask an input to the console with question",
-        "console_save_value": "and save value into variable"
+        "console_save_value": "and save value into variable",
+        "console_clear": "Clear the console"
     }
     return en;
 }

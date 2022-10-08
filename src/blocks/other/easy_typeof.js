@@ -2,6 +2,8 @@
   import { translate } from  "/src/locales";
   import localforage from "localforage";
   
+  (async () => {
+
   
   const blockData = {
   "type": "easy_typeof",
@@ -54,3 +56,5 @@
     var code = `typeof ${value_input} == '${dropdown_result_typeof}'`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
+
+})();

@@ -19,7 +19,6 @@
         "localforage": "^1.10.0",
         "vue": "^3.2.37",
         "vue-sweetalert2": "^5.0.5",
-        "vue-toast-notification": "^0.6.3",
         "vue-tour": "^2.0.0"
     },
     "devDependencies": {

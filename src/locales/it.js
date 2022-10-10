@@ -4,7 +4,7 @@ import localforage from "localforage";
 
 function getLangs() {
     return {
-        "key": "Inser a value",
+        "key": "Insert a value",
         "return": "Termina script",
         "eval": "Esegui codice",
         "start": "Inizio",

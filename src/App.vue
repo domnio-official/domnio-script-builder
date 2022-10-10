@@ -78,7 +78,7 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
         foo.value.workspace.clear();
         Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(autosave.GetAutoSave()), foo.value.workspace).then(console.log("Autosave has been imported"));
     }
-    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();");
+    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");
     
     function copy() {
       var copyText = document.getElementById("codeee").innerText;

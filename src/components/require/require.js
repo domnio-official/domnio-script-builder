@@ -11,7 +11,7 @@ function getRequires(code) {
     if (code.includes("exec(")) {
         requires.push("const { exec } = require(\"child_process\");");
     }
-    if (code.includes("new JSONdb(")) {
+    if (code.includes("JSONdb(")) {
         requires.push("const JSONdb = require('simple-json-db');");
     }
     if (code.includes("axios.get(") || code.includes("axios.post(")) {
@@ -25,6 +25,9 @@ function getRequires(code) {
     }
     if (code.includes("fss.")) {
         requires.push("const fss = require('fs/promises');");
+    }
+    if (code.includes("chokidar.")) {
+        requires.push("const chokidar = require('chokidar');");
     }
 
 

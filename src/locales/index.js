@@ -85,7 +85,14 @@ function returnTranslate(langss, langg, item, objlangg){
             return objlangg[String(item)];
         }
         else {
-            throw "No translation for " + item + " in " + langg;
+            if (item in en.getLangs()) {
+                objlangg = en.getLangs();
+                console.log(`%cTranslation for ${item} not found, using the eng language`, "color:red;");
+                return objlangg[String(item)];
+            }
+            else {
+                throw "No translation for " + item + " in " + langg;
+            }
         }
     }
     else {

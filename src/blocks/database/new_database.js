@@ -2,6 +2,7 @@
 
 import * as Blockly from "blockly/core";
 
+
 Blockly.Blocks['new_database'] = {
     init: function() {
       this.appendValueInput("NAME")

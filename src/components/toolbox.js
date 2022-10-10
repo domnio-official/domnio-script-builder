@@ -177,6 +177,18 @@ function list(){
     </shadow>
 </value>                
 </block>
+<block type="includes">
+<value name="TEXT">
+    <shadow type="text">
+        <field name="TEXT">Domnio</field>
+    </shadow>
+</value>
+<value name="TEXT">
+    <shadow type="text">
+        <field name="TEXT">Dom</field>
+    </shadow>
+</value>
+</block>
 <block type="newline"></block>
 <block type="starts_with">
 <value name="STRING">
@@ -816,8 +828,14 @@ function list(){
     </value>
     </block>
     </category>
-    <category name="Directories" colour="#a0a45c">
+    <category name="Watch" colour="#a0a45c">
+    <label text="Watch a file or a directory"/>
+        <block type="simple_dir_watch"/>
         <block type="dir_watch"/>
+        <block type="watch_add_parameter"/>
+    <label text="Events"/>
+        <block type="watch_file_create"/>
+        <block type="watch_dir_path_var"/>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

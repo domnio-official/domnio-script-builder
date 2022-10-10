@@ -31,4 +31,6 @@ Blockly.Blocks[blockData.type] = {
 
 String(translate("key", await localforage.getItem("language")))
 
+`${String(translate("key", await localforage.getItem("language")))}`
+
 // Charter: `

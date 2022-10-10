@@ -18,8 +18,8 @@
     import Swal from "sweetalert2";
     import JSZip from "jszip";
     import * as toolbox from './components/toolbox';
-    import * as functions from './components/functions/simplefunctions';
-    import * as autosave from './components/autosave';
+    // import * as functions from './components/functions/simplefunctions';
+    // import * as autosave from './components/autosave';
     import * as require from './components/require/require';
     // import * as save from './components/save-load';
     import Blockly from "blockly";
@@ -32,6 +32,40 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
 
   await delay(1000);
     window.location.reload();
+}
+else {
+  Swal.fire({
+  title: 'Autosave',
+  text: "There is an autosave available, do you want to restore it?",
+  icon: 'question',
+  showCancelButton: true,
+  confirmButtonColor: '#30a444',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Import autosave'
+}).then((result) => {
+  if (result.isConfirmed) {
+    getAutoSave()
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timerProgressBar: true,
+    timer: 1300
+    });
+    
+      Toast.fire({
+        icon: 'success',
+        title: 'Autosave imported'
+      })
+  }
+})
+}
+
+if (!await localforage.getItem("autosave") == null) {
+  foo.value.workspace.clear();
+        await localforage.getItem("autosave").then(function(result) {
+          Blockly.Xml.domToWorkspace(String(result), foo.value.workspace).then(console.log("Autosave has been imported"));
+        });
 }
 
 })();
@@ -74,9 +108,17 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
         // autosave.AutoSaveStart(foo.value.workspace);
     });
 
-    function getAutoSave(){
+    async function getAutoSave(){
+      localforage.setItem("importing", true);
         foo.value.workspace.clear();
-        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(autosave.GetAutoSave()), foo.value.workspace).then(console.log("Autosave has been imported"));
+        await localforage.getItem("autosave").then(function(result) {
+          result = Blockly.Xml.textToDom(result);
+          workspaceClear();
+          Blockly.Xml.domToWorkspace(result, foo.value.workspace);
+          console.log("Autosave has been imported");
+          localforage.setItem("importing", false);
+
+        });
     }
     const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");
     
@@ -196,7 +238,6 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
                 if (result.isConfirmed) {
                     workspaceClear();
                 const file = document.getElementById("load-code").files[0];
-                const documentName = file.name.split(".").slice(0, file.name.split(".").length-1);
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     JSZip.loadAsync(e.target.result)
@@ -292,7 +333,7 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
                 <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
                 <li><a class="dropdown-item" @click="askForFile">Load</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <!--<li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li> -->
+                <li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li>
                 <li><a class="dropdown-item" @click="workspaceClear(true)">Clear Workspace</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>

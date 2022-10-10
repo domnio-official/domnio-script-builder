@@ -27,6 +27,7 @@ const workspace = shallowRef();
 defineExpose({ workspace });
 
 onMounted(() => {
+  localforage.setItem("importing", false);
 
   async function setLocale() {
     await localforage.getItem("language").then(function(result) {
@@ -80,7 +81,7 @@ onMounted(() => {
     }
   }
 
-function savework(event) {
+async function savework(event) {
   const DISABLED_EVENTS = [
   Blockly.Events.BUBBLE_OPEN,
   Blockly.Events.BUMP_EVENTS,
@@ -98,8 +99,12 @@ function savework(event) {
 ];
   if (!DISABLED_EVENTS.includes(event.type)) {
     if (String(event.type) != "backpack_change"){
-      console.log("WORKSPACE: ", String(event.type))
-      autosave.SyncWorkSpace(workspace.value);
+      await localforage.getItem("importing").then(function (result) {
+        if (String(result) == "false") {
+          console.log("WORKSPACE: ", String(event.type));
+          autosave.SyncWorkSpace(workspace.value);
+        }
+      })
     }
   }
 }

@@ -7,7 +7,7 @@ import * as Blockly from "blockly";
 } */
 
 export async function GetAutoSave(){
-    return localforage.getItem("autosave");
+    return await localforage.getItem("autosave");
 }
 
 export async function SyncWorkSpace(workspace){

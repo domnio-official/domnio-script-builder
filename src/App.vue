@@ -114,10 +114,15 @@ if (!await localforage.getItem("autosave") == null) {
         await localforage.getItem("autosave").then(function(result) {
           result = Blockly.Xml.textToDom(result);
           workspaceClear();
-          Blockly.Xml.domToWorkspace(result, foo.value.workspace);
-          console.log("Autosave has been imported");
+          try {
+            Blockly.Xml.domToWorkspace(result, foo.value.workspace);
+            console.log("Autosave has been imported");
           localforage.setItem("importing", false);
-
+          }
+          catch (e) {
+            throw "Error while importing autosave: " + e.message;
+            localforage.setItem("importing", false);
+          }
         });
     }
     const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");

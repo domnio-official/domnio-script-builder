@@ -177,19 +177,19 @@ function list(){
     </shadow>
 </value>                
 </block>
+<block type="newline"></block>
 <block type="includes">
 <value name="TEXT">
     <shadow type="text">
         <field name="TEXT">Domnio</field>
     </shadow>
 </value>
-<value name="TEXT">
+<value name="INCLUDES">
     <shadow type="text">
         <field name="TEXT">Dom</field>
     </shadow>
 </value>
 </block>
-<block type="newline"></block>
 <block type="starts_with">
 <value name="STRING">
     <shadow type="text">

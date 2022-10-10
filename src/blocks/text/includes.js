@@ -1,5 +1,4 @@
 import Blockly from "blockly/core";
-import { registerRestrictions } from "../../restrictions";
 
 const blockName = "includes";
 
@@ -36,20 +35,3 @@ Blockly.JavaScript[blockName] = function(block) {
     
     return code;
 };
-
-registerRestrictions(blockName, [
-    {
-        type: "notempty",
-        message: "RES_INCLUDES_TEXT",
-        types: [
-            "TEXT"
-        ]
-    },
-    {
-        type: "notempty",
-        message: "RES_INCLUDES_INCLUDES",
-        types: [
-            "INCLUDES"
-        ]
-    }
-]);

@@ -330,6 +330,13 @@ function list(){
         </block>
     </value>
 </block>
+<block type="list_push">
+<value name="LIST">
+<block type="variables_get">
+    <field name="VAR" id="fztpO]@!)|*c81-vAZ)P">list</field>
+</block>
+</value>
+</block>
 <block type="lists_getSublist">
     <mutation at1="true" at2="true" />
     <field name="WHERE1">FROM_START</field>

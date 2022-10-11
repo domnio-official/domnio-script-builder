@@ -1,6 +1,17 @@
 
 function getLangs() {
     const en = {
+        "copy": "Copy",
+        "close": "Close",
+        "based_on": "Domnio Script Builder is based on",
+        "export_btn": "Export to javascript",
+        "save": "Save",
+        "load": "Load",
+        "l_autosave": "Load autosave",
+        "clr_workspace": "Clear workspace",
+        "credits": "Credits",
+        "settings": "Settings",
+        "ds": "Discord server",
         "key": "Insert a value",
         "return": "End script",
         "eval": "Run code",

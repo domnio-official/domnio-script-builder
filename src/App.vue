@@ -9,7 +9,8 @@
      * @fileoverview Main Vue component that includes the Blockly component.
      * @author dcoodien@google.com (Dylan Coodien)
      */
-    
+
+    import { translate } from  "/src/locales";
     import localforage from "localforage";
     import { ref, onMounted } from "vue";
     import BlocklyComponent from "./components/BlocklyComponent.vue";
@@ -24,6 +25,7 @@
     // import * as save from './components/save-load';
     import Blockly from "blockly";
     import BlocklyJS from "blockly/javascript";
+    var lang;
 
     (async () => {
 
@@ -34,7 +36,8 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
     window.location.reload();
 }
 else {
-  Swal.fire({
+  if (!await localforage.getItem("autosave") == null || !await localforage.getItem("autosave") == "") {
+    Swal.fire({
   title: 'Autosave',
   text: "There is an autosave available, do you want to restore it?",
   icon: 'question',
@@ -59,6 +62,26 @@ else {
       })
   }
 })
+  }
+
+  await localforage.getItem("language").then(function (lang) {
+    if(String(lang) == "it") {
+      lang = "it";
+  }
+  else {
+    lang = "en"
+  }
+  document.getElementById('js_export_btn').textContent = String(translate("export_btn", lang));
+      document.getElementById('ds').textContent = String(translate("ds", lang));
+      document.getElementById('settings').textContent = String(translate("settings", lang));
+      document.getElementById('save').innerHTML = String(translate("save", lang));
+      document.getElementById('load').textContent = String(translate("load", lang));
+      document.getElementById('l_autosave').textContent = String(translate("l_autosave", lang));
+      document.getElementById('credits').textContent = String(translate("credits", lang));
+      document.getElementById('liveToastBtn').textContent = String(translate("copy", lang));
+      document.getElementById('close').textContent = String(translate("close", lang));
+  })
+  
 }
 
 if (!await localforage.getItem("autosave") == null) {
@@ -69,9 +92,7 @@ if (!await localforage.getItem("autosave") == null) {
 }
 
 })();
-    
-    var lang;
-    const foo = ref();
+        const foo = ref();
     const code = ref();
     const options = {
       media: "./media/",
@@ -120,8 +141,8 @@ if (!await localforage.getItem("autosave") == null) {
           localforage.setItem("importing", false);
           }
           catch (e) {
-            throw "Error while importing autosave: " + e.message;
             localforage.setItem("importing", false);
+            throw "Error while importing autosave: " + e.message;
           }
         });
     }
@@ -321,27 +342,27 @@ if (!await localforage.getItem("autosave") == null) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button type="button" style="margin-top: 5px;" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#codeModal" v-on:click="showCode()">Export to Javascript</button>
+              <button type="button" style="margin-top: 5px;" class="btn btn-secondary" data-bs-toggle="modal" id="js_export_btn" data-bs-target="#codeModal" v-on:click="showCode()">Export to Javascript</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="https://dsc.gg/domnio" target="_blank" style="margin-top: 5px;">Discord server</a>
+              <a class="nav-link text-white" href="https://dsc.gg/domnio" id="ds" target="_blank" style="margin-top: 5px;">Discord server</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-top: 5px;">Settings</a>
+              <a class="nav-link text-white" href="" data-bs-toggle="offcanvas" id="settings" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-top: 5px;">Settings</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" style="margin-top: 5px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 File
               </a>
               <ul class="dropdown-menu bg-white">
-                <li><a class="dropdown-item" v-on:click="saveas()">Save</a></li>
+                <li><a class="dropdown-item" id="save" v-on:click="saveas()">Save</a></li>
                 <input hidden @change="load()" id="load-code" type="file" accept=".domscript,.zip,.xml"/>            
-                <li><a class="dropdown-item" @click="askForFile">Load</a></li>
+                <li><a class="dropdown-item" id="load" @click="askForFile">Load</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" @click="getAutoSave()">Load AutoSave</a></li>
-                <li><a class="dropdown-item" @click="workspaceClear(true)">Clear Workspace</a></li>
+                <li><a class="dropdown-item" id="l_autosave" @click="getAutoSave()">Load AutoSave</a></li>
+                <li><a class="dropdown-item" id="clr_workspace" @click="workspaceClear(true)">Clear Workspace</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" v-on:click="credits()">Credits</a></li>
+                <li><a class="dropdown-item" id="credits" v-on:click="credits()">Credits</a></li>
               </ul>
             </li>
             <div id="AD">
@@ -366,7 +387,7 @@ if (!await localforage.getItem("autosave") == null) {
             <pre v-html="code" class="text-white" id="codeee"></pre>
           </div>
           <div class="modal-footer bg-dark">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" v-on:click="copy()" data-bs-dismiss="modal" id="liveToastBtn">Copy</button>
           </div>
         </div>

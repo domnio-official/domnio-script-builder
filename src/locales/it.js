@@ -30,15 +30,19 @@ function getLangs() {
         "console_save_value": "e salva valore nella variabile",
         "console_clear": "Pulisci la console",
         "watch_simple_create-1": "Crea un sermplice guardatore con nome",
-        "watch_create-1": "Crea un guardatore con nome",
+        "watch_create-1": "Salva il nome del file nella variabile",
         "watch_create-2": "Guarda file / cartella",
-        "watch_create-3": "Con parametri",
-        "watch_create-4": "Poi",
+        "watch_create-3": "Salva il nome dell'evento nella variabile",
+        "watch_create-4": "Salva il nome del file nella variabile",
+        "then": "Poi",
+        "then_fsys": "Cambiamento rilevato",
         "watch-f_create-1": "Quando guardatore",
         "watch-f_create-2": "rileva un cambiamento del tipo",
         "watch-f_create-3": "fai",
         "watch-var-path": "Percorso",
-        "database_create": "Crea un database con nome"
+        "database_create": "Crea un database con nome",
+        "event": "Evento",
+        "fname": "Nome file"
     };
 }
 

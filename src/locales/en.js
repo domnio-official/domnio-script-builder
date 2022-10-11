@@ -27,15 +27,19 @@ function getLangs() {
         "console_save_value": "and save value into variable",
         "console_clear": "Clear the console",
         "watch_simple_create-1": "Create simple a watcher with name",
-        "watch_create-1": "Create a watcher with name",
+        "watch_create-1": "Save file name into variable",
         "watch_create-2": "Watch file / directory",
-        "watch_create-3": "With parameters",
-        "watch_create-4": "Then",
+        "watch_create-3": "Save event name into variable",
+        "watch_create-4": "Save file name into variable",
+        "then": "Then",
+        "then_fsys": "Change detected",
         "watch-f_create-1": "When watcher",
         "watch-f_create-2": "detects a change of type",
         "watch-f_create-3": "do",
         "watch-var-path": "Path",
-        "database_create": "Create a new database with name"
+        "database_create": "Create a new database with name",
+        "event": "Event",
+        "fname": "File name"
     }
     return en;
 }

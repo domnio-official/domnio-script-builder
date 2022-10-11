@@ -837,12 +837,17 @@ function list(){
     </category>
     <category name="Watch" colour="#a0a45c">
     <label text="Watch a file or a directory"/>
-        <block type="simple_dir_watch"/>
-        <block type="dir_watch"/>
-        <block type="watch_add_parameter"/>
-    <label text="Events"/>
-        <block type="watch_file_create"/>
-        <block type="watch_dir_path_var"/>
+        <block type="dir_watch">
+            <value name="file">
+                <shadow type="text">
+                    <field name="TEXT">hello.txt</field>
+                </shadow>
+            </value>
+        </block>
+    <label text="Variables"/>
+        <block type="filesys_variable_cdir"/>
+        <block type="filesys_event"/>
+        <block type="filesys_fname"/>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

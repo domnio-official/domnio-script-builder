@@ -4,7 +4,7 @@ function getLangs() {
         "copy": "Copy",
         "close": "Close",
         "based_on": "Domnio Script Builder is based on",
-        "export_btn": "Export to javascript",
+        "export_btn": "Export",
         "save": "Save",
         "load": "Load",
         "l_autosave": "Load autosave",

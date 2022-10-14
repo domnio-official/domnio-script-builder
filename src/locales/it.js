@@ -7,7 +7,7 @@ function getLangs() {
         "copy": "Copia",
         "close": "Chiudi",
         "based_on": "Domnio script builder è basato su ",
-        "export_btn": "Esporta in javascript",
+        "export_btn": "Esporta",
         "save": "Salva",
         "load": "Carica",
         "l_autosave": "Carica autosalvataggio",

@@ -27,6 +27,42 @@
     import BlocklyJS from "blockly/javascript";
     var lang;
 
+    var cModalState = 1;  // 1 = Javascript | 2 = package.json | 3 = ZIP
+
+    function updateBtn(type) {
+    if (type == 'js') {
+      document.getElementById("modal-js-btn").setAttribute("class", "btn btn-primary");
+      document.getElementById("modal-package-btn").setAttribute("class", "btn btn-outline-danger");
+      document.getElementById("modal-zip-btn").setAttribute("class", "btn btn-outline-secondary");
+      document.getElementById("packagetxt").style.display= "none";
+      document.getElementById("codeee").style.display= "block";
+      document.getElementById("packageDataa").style.display= "none";
+      cModalState = 1;
+    }
+    else if (type == 'package') {
+      document.getElementById("modal-package-btn").setAttribute("class", "btn btn-danger");
+      document.getElementById("modal-js-btn").setAttribute("class", "btn btn-outline-primary");
+      document.getElementById("modal-zip-btn").setAttribute("class", "btn btn-outline-secondary");
+      document.getElementById("packagetxt").style.display= "block";
+      document.getElementById("packageDataa").style.display= "block";
+      document.getElementById("codeee").style.display= "none";
+      cModalState = 2;
+      generatePackage()
+    }
+    else if (type == 'zip') {
+      document.getElementById("modal-zip-btn").setAttribute("class", "btn btn-secondary");
+      document.getElementById("modal-js-btn").setAttribute("class", "btn btn-outline-primary");
+      document.getElementById("modal-package-btn").setAttribute("class", "btn btn-outline-danger");
+      document.getElementById("packagetxt").style.display= "none";
+      document.getElementById("codeee").style.display= "none";
+      document.getElementById("packageDataa").style.display= "none";
+      cModalState = 3;
+    }
+    else {
+      throw "Unknown type '" + type + "' in updateBtn function"
+    }
+  }
+
     (async () => {
 
 if (await localforage.getItem("language") == null || await localforage.getItem("language") == "") {
@@ -36,6 +72,7 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
     window.location.reload();
 }
 else {
+  updateBtn('js')
   if (!await localforage.getItem("autosave") == null || !await localforage.getItem("autosave") == "") {
     Swal.fire({
   title: 'Autosave',
@@ -63,6 +100,7 @@ else {
   }
 })
   }
+  document.getElementById("package_version").value = "1.0.0"
 
   await localforage.getItem("language").then(function (lang) {
     if(String(lang) == "it") {
@@ -71,7 +109,7 @@ else {
   else {
     lang = "en"
   }
-  document.getElementById('js_export_btn').textContent = String(translate("export_btn", lang));
+      document.getElementById('js_export_btn').textContent = String(translate("export_btn", lang));
       document.getElementById('ds').textContent = String(translate("ds", lang));
       document.getElementById('settings').textContent = String(translate("settings", lang));
       document.getElementById('save').innerHTML = String(translate("save", lang));
@@ -94,6 +132,7 @@ if (!await localforage.getItem("autosave") == null) {
 })();
         const foo = ref();
     const code = ref();
+    const packagejson = ref();
     const options = {
       media: "./media/",
       grid: {
@@ -146,11 +185,29 @@ if (!await localforage.getItem("autosave") == null) {
           }
         });
     }
-    const showCode = () => (code.value = BlocklyJS.workspaceToCode(foo.value.workspace)).then(code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");
+
+    const showCode = () =>  { code.value = BlocklyJS.workspaceToCode(foo.value.workspace); code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk" };
     
     function copy() {
-      var copyText = document.getElementById("codeee").innerText;
+      if (cModalState == 1) {
+        var copyText = document.getElementById("codeee").innerText;
         navigator.clipboard.writeText(copyText)
+      }
+      else if (cModalState == 2) {
+        var copyText = document.getElementById("packagetxt").innerText;
+        navigator.clipboard.writeText(copyText)
+      }
+      else {
+        navigator.clipboard.writeText("Error")
+      }
+    }
+
+    function generatePackage() {
+      var p_author = document.getElementById("package_author").value;
+      var p_name = document.getElementById("package_name").value;
+      var p_version = document.getElementById("package_version").value;
+      var p_description = document.getElementById("package_description").value;
+      packagejson.value =  String(require.getRequires(BlocklyJS.workspaceToCode(foo.value.workspace), true, p_name, p_version, p_description, p_author));
     }
 
     function workspaceClear(displaywarn) {
@@ -196,6 +253,7 @@ if (!await localforage.getItem("autosave") == null) {
       })
 }
     }
+
     
     function credits() {
       Swal.fire({
@@ -342,7 +400,7 @@ if (!await localforage.getItem("autosave") == null) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button type="button" style="margin-top: 5px;" class="btn btn-secondary" data-bs-toggle="modal" id="js_export_btn" data-bs-target="#codeModal" v-on:click="showCode()">Export to Javascript</button>
+              <button type="button" style="margin-top: 5px;" class="btn btn-secondary" data-bs-toggle="modal" id="js_export_btn" data-bs-target="#codeModal" @click="updateBtn('js'); showCode();">Export</button>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="https://dsc.gg/domnio" id="ds" target="_blank" style="margin-top: 5px;">Discord server</a>
@@ -380,11 +438,30 @@ if (!await localforage.getItem("autosave") == null) {
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header bg-dark">
-            <h5 class="modal-title text-white" id="exampleModalLabel">Code</h5>
+            <button type="button" v-on:click="updateBtn('js')" id="modal-js-btn" style="margin-right: 12px;" class="btn btn-outline-primary">Javascript</button>
+            <button type="button" v-on:click="updateBtn('package')" id="modal-package-btn" style="margin-right: 12px;" class="btn btn-outline-danger">package.json</button>
+            <button type="button" v-on:click="updateBtn('zip')" id="modal-zip-btn" class="btn btn-outline-secondary">ZIP</button>
             <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body bg-dark">
             <pre v-html="code" class="text-white" id="codeee"></pre>
+            <div class="packageData" id="packageDataa" style="margin-bottom: 12px;">
+              <div class="row">
+                <div class="col-sm">
+                  <input type="text" class="form-control" id="package_author" placeholder="Author" @change="generatePackage()">
+                </div>
+                <div class="col-sm">
+                  <input type="text" class="form-control" id="package_name" placeholder="Name" @change="generatePackage()">
+                  </div>
+                <div class="col-sm">
+                  <input type="text" class="form-control" id="package_version" placeholder="Version" @change="generatePackage()">
+                </div>
+                <div class="col-sm">
+                  <input type="text" class="form-control" id="package_description" placeholder="Description" @change="generatePackage()">
+                </div>
+              </div>
+            </div>
+            <pre v-html="packagejson" class="text-white" id="packagetxt"></pre>
           </div>
           <div class="modal-footer bg-dark">
             <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>

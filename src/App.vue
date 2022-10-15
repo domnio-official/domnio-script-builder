@@ -11,6 +11,7 @@
      */
 
     import { translate } from  "/src/locales";
+    import { readme } from "/src/locales/simpleTexts.js"
     import localforage from "localforage";
     import { ref, onMounted } from "vue";
     import BlocklyComponent from "./components/BlocklyComponent.vue";
@@ -309,7 +310,7 @@ if (!await localforage.getItem("autosave") == null) {
       zip.file("index.js", "(async () => {\n" + require.getRequires(String(BlocklyJS.workspaceToCode(foo.value.workspace))) + BlocklyJS.workspaceToCode(foo.value.workspace) + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");
       zip.file("package.json", generatePackage("return"));
       zip.file(".replit", 'run = "node index.js"');
-      zip.file("README.txt", "Thank you for using the Domnio Script Builder!\nTo run the bot, install NodeJS and NPM on your computer, then, extract the zip in a folder, open the terminal and run first 'npm i'.\nWhen finished, run 'npm start' and your script should start!\n\nNote: The command 'npm i' should be ran only once, joun our discord server or read the docs for more info.\n\n\n© Domnio 2022");
+      zip.file("README.txt", String(readme()));
       zip.generateAsync({type:"blob"}).then(function (content) {
       const a = document.createElement("a");
       a.style = "display: none";

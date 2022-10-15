@@ -31,6 +31,7 @@
 import * as en from "./en";
 import * as it from "./it";
 import localforage from "localforage";
+import "./simpleTexts"
 
 
 var objlang;

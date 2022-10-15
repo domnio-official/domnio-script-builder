@@ -46,7 +46,7 @@ function getRequires(code, listPackage, name, version, desc, author) {
     "name": "${name}",
     "version": "${version}",
     "description": "${desc}",
-    "main": "./index.js",
+    "main": "index.js",
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon"

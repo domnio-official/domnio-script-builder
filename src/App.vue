@@ -100,6 +100,8 @@ else {
   }
 })
   }
+  document.getElementById("package_description").value = "A super duper fantastic script!"
+  document.getElementById("package_name").value = "Awesome script"
   document.getElementById("package_version").value = "1.0.0"
 
   await localforage.getItem("language").then(function (lang) {
@@ -177,12 +179,18 @@ if (!await localforage.getItem("autosave") == null) {
           try {
             Blockly.Xml.domToWorkspace(result, foo.value.workspace);
             console.log("Autosave has been imported");
-          localforage.setItem("importing", false);
+            localforage.setItem("importing", false);
           }
           catch (e) {
             localforage.setItem("importing", false);
             throw "Error while importing autosave: " + e.message;
           }
+        });
+        await localforage.getItem("other").then(function(values) {
+          document.getElementById("package_author").value = String(values.package_author);
+          document.getElementById("package_description").value = values.package_description;
+          document.getElementById("package_name").value = values.package_name;
+          document.getElementById("package_version").value = values.package_version;
         });
     }
 
@@ -202,12 +210,21 @@ if (!await localforage.getItem("autosave") == null) {
       }
     }
 
-    function generatePackage() {
+
+    function generatePackage(save) {
       var p_author = document.getElementById("package_author").value;
       var p_name = document.getElementById("package_name").value;
       var p_version = document.getElementById("package_version").value;
       var p_description = document.getElementById("package_description").value;
       packagejson.value =  String(require.getRequires(BlocklyJS.workspaceToCode(foo.value.workspace), true, p_name, p_version, p_description, p_author));
+      if (save == true) {
+        localforage.setItem("other", {
+        "package_name": p_name,
+        "package_author": p_author,
+        "package_description": p_description,
+        "package_version": p_version
+      });
+      }
     }
 
     function workspaceClear(displaywarn) {
@@ -274,12 +291,19 @@ if (!await localforage.getItem("autosave") == null) {
     
     
        function saveas() {
-          const zip = new JSZip();
-          const xmlContent = Blockly.Xml.domToPrettyText(
+        const xmlContent = Blockly.Xml.domToPrettyText(
             Blockly.Xml.workspaceToDom(foo.value.workspace)
           );
+          var config = {
+            "code": String(xmlContent),
+            "package_name": String(document.getElementById("package_name").value),
+            "package_author": String(document.getElementById("package_author").value),
+            "package_version": String(document.getElementById("package_version").value),
+            "package_description": String(document.getElementById("package_description").value)
+          }
+          const zip = new JSZip();
           const fileName = `projct.domscript`;
-          zip.file("blocks.xml", xmlContent);
+          zip.file("config.json", new Blob([JSON.stringify(config, undefined, 2)]));
           zip.generateAsync({
               type: "blob",
             })
@@ -326,12 +350,17 @@ if (!await localforage.getItem("autosave") == null) {
                 reader.onload = (e) => {
                     JSZip.loadAsync(e.target.result)
                         .then((data) => {
-                        if (data.file("blocks.xml")) {
-                            return data.file("blocks.xml").async("string")
+                        if (data.file("config.json")) {
+                            return data.file("config.json").async("string")
                         }
                     })
                     .then((text) => {
-                        const xml = Blockly.Xml.textToDom(text);
+                        var values = JSON.parse(text);
+                        document.getElementById("package_author").value = String(values.package_author);
+                        document.getElementById("package_description").value = values.package_description;
+                        document.getElementById("package_name").value = values.package_name;
+                        document.getElementById("package_version").value = values.package_version;
+                        const xml = Blockly.Xml.textToDom(values.code);
                         Blockly.Xml.domToWorkspace(xml, foo.value.workspace);
                         reader.close();
                         Swal.fire({
@@ -434,7 +463,7 @@ if (!await localforage.getItem("autosave") == null) {
           </div>
       </div>
     </nav>
-    <div class="modal fade modal-xl modal-dialog-scrollable" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-xl modal-dialog-scrollable text-dark" id="codeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header bg-dark">
@@ -448,16 +477,20 @@ if (!await localforage.getItem("autosave") == null) {
             <div class="packageData" id="packageDataa" style="margin-bottom: 12px;">
               <div class="row">
                 <div class="col-sm">
-                  <input type="text" class="form-control" id="package_author" placeholder="Author" @change="generatePackage()">
+                  <p class="text-white">Author</p>
+                  <input type="text" class="form-control" id="package_author" placeholder="Author" @change="generatePackage(true)">
                 </div>
                 <div class="col-sm">
-                  <input type="text" class="form-control" id="package_name" placeholder="Name" @change="generatePackage()">
+                  <p class="text-white">Name</p>
+                  <input type="text" class="form-control" id="package_name" placeholder="Name" @change="generatePackage(true)">
                   </div>
                 <div class="col-sm">
-                  <input type="text" class="form-control" id="package_version" placeholder="Version" @change="generatePackage()">
+                  <p class="text-white">Version</p>
+                  <input type="text" class="form-control" id="package_version" placeholder="Version" @change="generatePackage(true)">
                 </div>
                 <div class="col-sm">
-                  <input type="text" class="form-control" id="package_description" placeholder="Description" @change="generatePackage()">
+                  <p class="text-white">Description</p>
+                  <input type="text" class="form-control" id="package_description" placeholder="Description" @change="generatePackage(true)">
                 </div>
               </div>
             </div>
@@ -553,6 +586,10 @@ if (!await localforage.getItem("autosave") == null) {
         margin-left: 100px;
         display: flex;
         justify-content: space-between;
+    }
+
+    input[type="text"]{
+      font-family: "Nunito", "Ubuntu", sans-serif;
     }
     
     

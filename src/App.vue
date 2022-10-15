@@ -37,6 +37,8 @@
       document.getElementById("packagetxt").style.display= "none";
       document.getElementById("codeee").style.display= "block";
       document.getElementById("packageDataa").style.display= "none";
+      document.getElementById("down_zip").style.display= "none";
+      document.getElementById("copyBtn").style.display= "block";
       cModalState = 1;
     }
     else if (type == 'package') {
@@ -46,6 +48,8 @@
       document.getElementById("packagetxt").style.display= "block";
       document.getElementById("packageDataa").style.display= "block";
       document.getElementById("codeee").style.display= "none";
+      document.getElementById("down_zip").style.display= "none";
+      document.getElementById("copyBtn").style.display= "block";
       cModalState = 2;
       generatePackage()
     }
@@ -56,6 +60,8 @@
       document.getElementById("packagetxt").style.display= "none";
       document.getElementById("codeee").style.display= "none";
       document.getElementById("packageDataa").style.display= "none";
+      document.getElementById("down_zip").style.display= "block";
+      document.getElementById("copyBtn").style.display= "none";
       cModalState = 3;
     }
     else {
@@ -212,6 +218,14 @@ if (!await localforage.getItem("autosave") == null) {
 
 
     function generatePackage(save) {
+      if (save == "return") {
+      var p_author = document.getElementById("package_author").value;
+      var p_name = document.getElementById("package_name").value;
+      var p_version = document.getElementById("package_version").value;
+      var p_description = document.getElementById("package_description").value;
+      return String(require.getRequires(BlocklyJS.workspaceToCode(foo.value.workspace), true, p_name, p_version, p_description, p_author));
+      }
+      else {
       var p_author = document.getElementById("package_author").value;
       var p_name = document.getElementById("package_name").value;
       var p_version = document.getElementById("package_version").value;
@@ -224,6 +238,7 @@ if (!await localforage.getItem("autosave") == null) {
         "package_description": p_description,
         "package_version": p_version
       });
+      }
       }
     }
 
@@ -287,6 +302,23 @@ if (!await localforage.getItem("autosave") == null) {
     function redo() {
         Blockly.mainWorkspace.undo(true);
         console.log("redo");
+    }
+
+    function download() {
+      var zip = new JSZip();
+      zip.file("index.js", "(async () => {\n" + require.getRequires(String(BlocklyJS.workspaceToCode(foo.value.workspace))) + BlocklyJS.workspaceToCode(foo.value.workspace) + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk");
+      zip.file("package.json", generatePackage("return"));
+      zip.file(".replit", 'run = "node index.js"');
+      zip.file("README.txt", "Thank you for using the Domnio Script Builder!\nTo run the bot, install NodeJS and NPM on your computer, then, extract the zip in a folder, open the terminal and run first 'npm i'.\nWhen finished, run 'npm start' and your script should start!\n\nNote: The command 'npm i' should be ran only once, joun our discord server or read the docs for more info.\n\n\n© Domnio 2022");
+      zip.generateAsync({type:"blob"}).then(function (content) {
+      const a = document.createElement("a");
+      a.style = "display: none";
+      document.body.appendChild(a);
+      const url = window.URL.createObjectURL(content);
+      a.href = url;
+      a.download = "project.zip";
+      a.click();
+      });
     }
     
     
@@ -472,7 +504,10 @@ if (!await localforage.getItem("autosave") == null) {
             <button type="button" v-on:click="updateBtn('zip')" id="modal-zip-btn" class="btn btn-outline-secondary">ZIP</button>
             <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body bg-dark">
+          <div class="modal-body bg-dark"> <!-- INIZIO -->
+            <div class="down_zip" id="down_zip">
+            <button type="button" id="btn_down_zip" class="btn btn-primary btn-lg" @click="download()">Download ZIP</button>
+            </div>
             <pre v-html="code" class="text-white" id="codeee"></pre>
             <div class="packageData" id="packageDataa" style="margin-bottom: 12px;">
               <div class="row">
@@ -495,10 +530,11 @@ if (!await localforage.getItem("autosave") == null) {
               </div>
             </div>
             <pre v-html="packagejson" class="text-white" id="packagetxt"></pre>
+            <!-- FINE -->
           </div>
           <div class="modal-footer bg-dark">
             <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="copy()" data-bs-dismiss="modal" id="liveToastBtn">Copy</button>
+            <button type="button" class="btn btn-primary" v-on:click="copy()" data-bs-dismiss="modal" id="copyBtn">Copy</button>
           </div>
         </div>
       </div>
@@ -590,6 +626,10 @@ if (!await localforage.getItem("autosave") == null) {
 
     input[type="text"]{
       font-family: "Nunito", "Ubuntu", sans-serif;
+    }
+
+    .down_zip {
+      text-align: center;
     }
     
     

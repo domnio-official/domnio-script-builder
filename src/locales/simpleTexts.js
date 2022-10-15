@@ -35,7 +35,7 @@ Note 2: If you wanna start your script multiple times, there is no need to alway
 
 Need more help? 
 
-Join our Discord Server: https://dsc.gg/domnio
+Join our Discord Server: https://domnio.tk/discord
 Or contact us via e-mail: 
 
 

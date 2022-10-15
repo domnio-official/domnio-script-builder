@@ -507,6 +507,7 @@ if (!await localforage.getItem("autosave") == null) {
           </div>
           <div class="modal-body bg-dark"> <!-- INIZIO -->
             <div class="down_zip" id="down_zip">
+            <p class="text-white">The ZIP file contains all the files needed to run the script.</p>
             <button type="button" id="btn_down_zip" class="btn btn-primary btn-lg" @click="download()">Download ZIP</button>
             </div>
             <pre v-html="code" class="text-white" id="codeee"></pre>

@@ -302,6 +302,7 @@ function list(){
 </block>
 <block type="lists_length" />
 <block type="lists_isEmpty" />
+<block type="list_contains" />
 <block type="lists_indexOf">
     <field name="END">FIRST</field>
     <value name="VALUE">

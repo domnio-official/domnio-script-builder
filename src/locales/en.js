@@ -39,7 +39,9 @@ function getLangs() {
         "watch-var-path": "Path",
         "database_create": "Create a new database with name",
         "event": "Event",
-        "fname": "File name"
+        "fname": "File name",
+        "list": "Lista",
+        "contains": "contains"
     }
     return en;
 }

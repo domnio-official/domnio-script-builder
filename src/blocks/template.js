@@ -8,6 +8,7 @@
 import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
+var language = await localforage.getItem("language");
 
 (async () => {
 
@@ -29,8 +30,8 @@ Blockly.Blocks[blockData.type] = {
 
 // translate template:
 
-String(translate("key", await localforage.getItem("language")))
+String(translate("key", language))
 
-`${String(translate("key", await localforage.getItem("language")))}`
+`${String(translate("key", language))}`
 
 // Charter: `

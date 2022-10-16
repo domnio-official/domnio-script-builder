@@ -42,7 +42,9 @@ function getLangs() {
         "watch-var-path": "Percorso",
         "database_create": "Crea un database con nome",
         "event": "Evento",
-        "fname": "Nome file"
+        "fname": "Nome file",
+        "list": "Lista",
+        "contains": "contiene"
     };
 }
 

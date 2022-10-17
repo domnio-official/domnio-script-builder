@@ -3,14 +3,13 @@
 import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
-var language = await localforage.getItem("language");
 
 (async () => {
 
 
 const blockData = {
     "type": "list_contains",
-    "message0": `${String(translate("list", language))} %1 ${String(translate("contains", language))} %2`,
+    "message0": `${String(translate("list", await localforage.getItem("language")))} %1 ${String(translate("contains", await localforage.getItem("language")))} %2`,
     "args0": [
       {
         "type": "input_value",

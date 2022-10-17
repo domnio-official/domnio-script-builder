@@ -44,7 +44,10 @@ function getLangs() {
         "event": "Evento",
         "fname": "Nome file",
         "list": "Lista",
-        "contains": "contiene"
+        "contains": "contiene",
+        "in_list": "Nella lista",
+        "push": "spingi",
+        "express_create": "Crea un server con nome %1 %2 Utilizza porta %3 Server pronto %4"
     };
 }
 

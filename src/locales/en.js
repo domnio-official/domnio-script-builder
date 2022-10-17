@@ -40,8 +40,11 @@ function getLangs() {
         "database_create": "Create a new database with name",
         "event": "Event",
         "fname": "File name",
-        "list": "Lista",
-        "contains": "contains"
+        "list": "List",
+        "contains": "contains",
+        "in_list": "In list",
+        "push": "push",
+        "express_create": "Create a server with name %1 %2 Host on port %3 On ready %4"
     }
     return en;
 }

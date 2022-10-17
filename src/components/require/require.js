@@ -31,6 +31,10 @@ function getRequires(code, listPackage, name, version, desc, author) {
         requires.push("const chokidar = require('chokidar');");
         packages.push('"chokidar": "^3.5.3",');
     }
+    if (code.includes("express()")) {
+        requires.push("const express = require('express');");
+        packages.push('"express": "^4.18.2",');
+    }
 
 
     // ---- RETURN ------

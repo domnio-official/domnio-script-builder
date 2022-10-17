@@ -72,6 +72,7 @@
 
     (async () => {
 
+
 if (await localforage.getItem("language") == null || await localforage.getItem("language") == "") {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -80,6 +81,7 @@ if (await localforage.getItem("language") == null || await localforage.getItem("
 }
 else {
   updateBtn('js')
+  document.getElementById("devv").style.display = "none";
   if (!await localforage.getItem("autosave") == null || !await localforage.getItem("autosave") == "") {
     Swal.fire({
   title: 'Autosave',
@@ -139,7 +141,7 @@ if (!await localforage.getItem("autosave") == null) {
 }
 
 })();
-        const foo = ref();
+    const foo = ref();
     const code = ref();
     const packagejson = ref();
     const options = {
@@ -174,7 +176,28 @@ if (!await localforage.getItem("autosave") == null) {
     };
 
     onMounted(() => {
-        // autosave.AutoSaveStart(foo.value.workspace);
+      
+    });
+    // document.getElementById("devv").style.display = "none";
+
+    var keys = [];
+    var isDev = false;
+
+    document.addEventListener('keydown', key => {
+      keys.push(String(key.key));
+      if (isDev == false) {
+        if (keys.includes("Control") && keys.includes("Shift") && keys.includes("Alt") && keys.includes("D") || keys.includes("d")) {
+        keys = [];
+        isDev = true;
+        alert("Developer options activated");
+        document.getElementById("devv").style.display = "block"; 
+      }
+      }
+    });
+
+    document.addEventListener('keyup', key => {
+      keys.splice(keys.indexOf(key.key), 1);
+      keys = [];
     });
 
     async function getAutoSave(){
@@ -203,8 +226,9 @@ if (!await localforage.getItem("autosave") == null) {
 
     const showCode = () =>  { code.value = BlocklyJS.workspaceToCode(foo.value.workspace); code.value = "(async () => {\n" + require.getRequires(String(code.value)) + code.value + "})();\n\n// Made with the Domnio Script Builder | https://scriptbuild.domnio.tk" };
     
-    function copy() {
-      if (cModalState == 1) {
+    function copy(type) {
+      if (type == null) {
+        if (cModalState == 1) {
         var copyText = document.getElementById("codeee").innerText;
         navigator.clipboard.writeText(copyText)
       }
@@ -214,6 +238,13 @@ if (!await localforage.getItem("autosave") == null) {
       }
       else {
         navigator.clipboard.writeText("Error")
+      }
+      }
+      else {
+        if (type == "workspace") {
+          navigator.clipboard.writeText(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(foo.value.workspace)));
+          alert("Done");
+        }
       }
     }
 
@@ -286,6 +317,7 @@ if (!await localforage.getItem("autosave") == null) {
       })
 }
     }
+
 
     
     function credits() {
@@ -432,9 +464,19 @@ if (!await localforage.getItem("autosave") == null) {
             title: "Success!",
             icon: 'success',
             html: "<b>Reload the page to take effect!</b>",
-            confirmButtonText: "OK"
-          });
-        }
+            confirmButtonText: "Reload now",
+            cancelButtonText: 'OK',
+            showCancelButton: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const a = document.createElement("a");
+              a.style = "display: none";
+              document.body.appendChild(a);
+              a.href = "";
+              a.click();
+            }
+        });
+      }
         catch (err) {
           Swal.fire({
             title: "Error!",
@@ -555,9 +597,15 @@ if (!await localforage.getItem("autosave") == null) {
         Language
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="" v-on:click="setLang('en')">English</a></li>
-        <li><a class="dropdown-item" href="" v-on:click="setLang('it')">Italiano</a></li>
+        <li><a class="dropdown-item" href="#" v-on:click="setLang('en')">English</a></li>
+        <li><a class="dropdown-item" href="#" v-on:click="setLang('it')">Italiano</a></li>
       </ul>
+    </div>
+    <div class="dev" id="devv">
+      <h4> DSB Developer Options </h4>
+      <div class="btn-group">
+        <a href="#" class="btn btn-secondary" @click="copy('workspace')">Copy workspace xml</a>
+  </div>
     </div>
   </div>
 </div>
@@ -580,6 +628,10 @@ if (!await localforage.getItem("autosave") == null) {
     }
     
     a {
+      font-family: "Nunito", "Ubuntu", sans-serif;
+    }
+
+    h4 {
       font-family: "Nunito", "Ubuntu", sans-serif;
     }
     
@@ -632,6 +684,17 @@ if (!await localforage.getItem("autosave") == null) {
 
     .down_zip {
       text-align: center;
+    }
+
+    .dev {
+      margin-top: 10%;
+      color: white;
+    }
+    .offcanvas-body {
+      text-align: center;
+      overflow:hidden;
+      width:auto;
+      display:inline;
     }
     
     

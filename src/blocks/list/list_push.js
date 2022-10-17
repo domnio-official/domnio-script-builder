@@ -1,9 +1,12 @@
 import Blockly from "blockly/core";
+import { translate } from  "/src/locales";
+import localforage from "localforage";
+var language = await localforage.getItem("language");
 
 const blockName = "list_push";
 
 const blockData = {
-    "message0": "in list %1 push %2",
+    "message0": `${String(translate("in_list", language))} %1 ${String(translate("push", language))} %2`,
     "args0": [
         {
             "type": "input_value",

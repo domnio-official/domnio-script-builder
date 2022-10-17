@@ -302,7 +302,18 @@ function list(){
 </block>
 <block type="lists_length" />
 <block type="lists_isEmpty" />
-<block type="list_contains" />
+<block type="list_contains">
+<value name="list">
+<block type="variables_get">
+    <field name="VAR" id="fztpO]@!)|*c81-vAZ)P">list</field>
+</block>
+</value>
+<value name="contains">
+<shadow type="text">
+    <field name="TEXT">domnio</field>
+</shadow>
+</value>
+</block>
 <block type="lists_indexOf">
     <field name="END">FIRST</field>
     <value name="VALUE">
@@ -544,7 +555,18 @@ function list(){
   </block>
   <block type="console_clear"></block>
   <label text='Asks an input to the console and saves the result in the "value" block' />
-  <block type="pick_input"></block>
+  <block type="pick_input">
+  <value name="ask input">
+    <block type="text">
+      <field name="TEXT">Hello!</field>
+    </block>
+  </value>
+  <value name="save input">
+    <block type="variables_get">
+      <field name="VAR">reply</field>
+    </block>
+  </value>
+</block>
   <block type="ask_input_left"></block>
     </category>
     <sep />
@@ -849,6 +871,16 @@ function list(){
         <block type="filesys_variable_cdir"/>
         <block type="filesys_event"/>
         <block type="filesys_fname"/>
+    </category>
+    <sep />
+    <category name="Website" colour="#6F8FAF">
+        <block type="express_createsrv">
+            <value name="port">
+                <block type="math_number">
+                    <field name="NUM">8080</field>
+                </block>
+            </value>
+        </block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

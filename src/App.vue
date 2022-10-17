@@ -185,8 +185,9 @@ if (!await localforage.getItem("autosave") == null) {
 
     document.addEventListener('keydown', key => {
       keys.push(String(key.key));
+      console.log(keys)
       if (isDev == false) {
-        if (keys.includes("Control") && keys.includes("Shift") && keys.includes("Alt") && keys.includes("D") || keys.includes("d")) {
+        if (keys.includes("Control") && keys.includes("Shift") && keys.includes("Alt") && (keys.includes("D") || keys.includes("d"))) {
         keys = [];
         isDev = true;
         alert("Developer options activated");

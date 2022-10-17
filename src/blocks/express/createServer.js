@@ -1,4 +1,4 @@
-// Block URL: 
+// Block URL: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#n2nkd9
 
 import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
@@ -48,7 +48,7 @@ Blockly.Blocks[blockData.type] = {
     var value_port = Blockly.JavaScript.valueToCode(block, 'port', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_on_finish = Blockly.JavaScript.statementToCode(block, 'on_finish');
     var code = 
-`const ${text_namesrv} = express();
+`// const ${text_namesrv} = express();
 
 ${text_namesrv}.listen(${value_port}, () => {
     ${statements_on_finish}});\n`

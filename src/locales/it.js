@@ -47,7 +47,9 @@ function getLangs() {
         "contains": "contiene",
         "in_list": "Nella lista",
         "push": "spingi",
-        "express_create": "Crea un server con nome %1 %2 Utilizza porta %3 Server pronto %4"
+        "express_create": "Crea un server con nome %1 %2 Utilizza porta %3 Server pronto %4",
+        "on_request": "Quando il server %1 %2 Riceve una richiesta del tipo %3 %4 Al percorso %5 Fai %6",
+        "express_res": "Rispondi con %1"
     };
 }
 

@@ -31,8 +31,20 @@ function getRequires(code, listPackage, name, version, desc, author) {
         requires.push("const chokidar = require('chokidar');");
         packages.push('"chokidar": "^3.5.3",');
     }
-    if (code.includes("express()")) {
+    if (code.includes("// const ") && code.includes(" = express();")) {
         requires.push("const express = require('express');");
+        var things = code.split('\n');
+        console.log(things)
+        things.forEach(function (line) {
+            console.log("arrivat")
+            if (line.includes("// const ")) {
+                console.log("includee")
+                var AppName;
+                AppName = (String(line).replace(new RegExp(String('// const '), 'g'), String('')));
+                AppName = (String(AppName).replace(String('  '), ''));
+                requires.push("const " + AppName);
+            };
+        });
         packages.push('"express": "^4.18.2",');
     }
 

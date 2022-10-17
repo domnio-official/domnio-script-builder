@@ -44,7 +44,9 @@ function getLangs() {
         "contains": "contains",
         "in_list": "In list",
         "push": "push",
-        "express_create": "Create a server with name %1 %2 Host on port %3 On ready %4"
+        "express_create": "Create a server with name %1 %2 Host on port %3 On ready %4",
+        "on_request": "When the server %1 %2 Recives a request of type %3 %4 At path %5 Do %6",
+        "express_res": "Respond with %1"
     }
     return en;
 }

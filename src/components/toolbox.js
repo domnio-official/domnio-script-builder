@@ -881,6 +881,21 @@ function list(){
                 </block>
             </value>
         </block>
+        <label text="On recive"/>
+        <block type="express_onreq">
+        <value name="path">
+          <shadow type="text">
+            <field name="TEXT">/</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="express_res">
+      <value name="with">
+        <shadow type="text">
+          <field name="TEXT">Hello World!</field>
+        </shadow>
+      </value>
+    </block>
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

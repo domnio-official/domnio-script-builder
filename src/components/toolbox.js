@@ -889,13 +889,13 @@ function list(){
           </shadow>
         </value>
       </block>
-      <block type="express_res">
+      <!-- <block type="express_res">
       <value name="with">
         <shadow type="text">
           <field name="TEXT">Hello World!</field>
         </shadow>
       </value>
-    </block>
+    </block> -->
     </category>
   </xml>`.replace(/{{\s([A-z]{3,})\s}}/g);
 

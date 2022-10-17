@@ -3,14 +3,13 @@
 import * as Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
-var language = await localforage.getItem("language");
 
 (async () => {
 
 
 const blockData = {
   "type": "express_onreq",
-  "message0": String(translate("on_request", language)),
+  "message0": String(translate("on_request", await localforage.getItem("language"))),
   "args0": [
     {
       "type": "field_input",

@@ -2,6 +2,8 @@ import Blockly from "blockly/core";
 import { translate } from  "/src/locales";
 import localforage from "localforage";
 
+(async () => {
+
 const blockName = "list_push";
 
 const blockData = {
@@ -37,3 +39,5 @@ Blockly.JavaScript[blockName] = function(block) {
     const code = `${list}.push(${push});\n`
     return code;
 };
+
+})();

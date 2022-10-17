@@ -7,33 +7,34 @@ var language = await localforage.getItem("language");
 
 (async () => {
 
-
 const blockData = {
-    "type": "express_createsrv",
-    "message0": String(translate("express_create", language)),
-    "args0": [
-      {
-        "type": "field_input",
-        "name": "nameSrv",
-        "text": "app"
-      },
-      {
-        "type": "input_dummy"
-      },
-      {
-        "type": "input_value",
-        "name": "port",
-        "check": "Number"
-      },
-      {
-        "type": "input_statement",
-        "name": "on_finish"
-      }
-    ],
-    "colour": 210,
-    "tooltip": "",
-    "helpUrl": ""
-  };
+  "type": "express_createsrv",
+  "message0": String(translate("express_create", language)),
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "nameSrv",
+      "text": "app"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "port",
+      "check": "Number"
+    },
+    {
+      "type": "input_statement",
+      "name": "on_finish"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 210,
+  "tooltip": "",
+  "helpUrl": ""
+};
 
 Blockly.Blocks[blockData.type] = {
     init: function () {
@@ -49,7 +50,7 @@ Blockly.Blocks[blockData.type] = {
     var code = 
 `const ${text_namesrv} = express();
 
-app.listen(${value_port}, () => {
+${text_namesrv}.listen(${value_port}, () => {
     ${statements_on_finish}});\n`
     return code;
   };

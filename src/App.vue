@@ -10,6 +10,8 @@
      * @author dcoodien@google.com (Dylan Coodien)
      */
 
+
+    import user from "./components/pocketbase.js"
     import { translate } from  "/src/locales";
     import { readme } from "/src/locales/simpleTexts.js"
     import localforage from "localforage";
@@ -354,6 +356,30 @@ if (!await localforage.getItem("autosave") == null) {
       a.click();
       });
     }
+
+    function save_acc() {
+      Swal.fire({
+  title: "An input!",
+  text: "Write something interesting:",
+  type: "input",
+  showCancelButton: true,
+  closeOnConfirm: false,
+  animation: "slide-from-top",
+  inputPlaceholder: "Write something"
+},
+function(inputValue){
+  if (inputValue === null) return false;
+  
+  if (inputValue === "") {
+    Swal.showInputError("You need to write something!");
+    return false
+  }
+  
+  swal("Nice!", "You wrote: " + inputValue, "success");
+});
+
+
+    }
     
     
        function saveas() {
@@ -488,6 +514,10 @@ if (!await localforage.getItem("autosave") == null) {
         }
 
       }
+
+      function saveOnAccount() {
+        user.addScriptproject(document.getElementById("user").value, document.getElementById("password").value, document.getElementById("nameProject").value)
+      }
     </script>
     
     <template>
@@ -527,6 +557,9 @@ if (!await localforage.getItem("autosave") == null) {
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" id="credits" v-on:click="credits()">Credits</a></li>
               </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" id="save_acc" style="margin-top: 5px;" data-bs-toggle="modal" href="#" data-bs-target="#accountLogIn">Save project into the account</a>
             </li>
             <div id="AD">
             <a href="https://domnio.tk/#team" target="_blank"><img src="./assets/defaultBanner.png" height="50" draggable="false" class="d-inline-block align-text-top"></a>
@@ -607,6 +640,37 @@ if (!await localforage.getItem("autosave") == null) {
       <div class="btn-group">
         <a href="#" class="btn btn-secondary" @click="copy('workspace')">Copy workspace xml</a>
   </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="accountLogIn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Save into Domnio account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nameProject" placeholder="Awesome project">
+            <label for="floatingInput">Name of the project</label>
+          </div>
+          <br>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="user" placeholder="name@example.com">
+            <label for="floatingInput">Email / Username</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" v-on:click="saveOnAccount()">Login and save</button>
+      </div>
     </div>
   </div>
 </div>

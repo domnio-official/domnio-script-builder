@@ -24,7 +24,7 @@ Blockly.Blocks['get_obj_key'] = {
     if (value_key_name.startsWith("'")) {
       value_key_name = value_key_name.slice(0, -1);
       value_key_name = value_key_name.replace('\'', '');
-      var code = `${value_obj_name}.${value_key_name}`;
+      var code = `${value_obj_name}[${value_key_name}]`;
     }
     else {
       var code = `${value_obj_name}[String(${value_key_name})]`;

@@ -1,0 +1,6 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: script-builder
+    src: .
+    engine: vue
